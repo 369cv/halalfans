@@ -85,8 +85,7 @@ Contact: baha@bahasavage.com
 | Permission | Type | Justification |
 |------------|------|---------------|
 | clipboardWrite | permissions | Allows the user to copy the generated prompt to the clipboard with one click. |
-| storage | permissions | Stores the user's license key, local quota, and prompt history on device. |
-| https://autoprompter-backend.onrender.com/* | host_permissions | Optional connection to production inference backend for prompt reverse-engineering and license quota verification. |
+| storage | permissions | Stores the user's license key, local quota, and prompt history locally on device. |
 
 ## Privacy & Data Use
 
