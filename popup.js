@@ -30,6 +30,45 @@ const keyDisplay = document.getElementById("keyDisplay");
 
 let imageDataUrl = null;
 let apiKey = null;
+let currentFormat = "flux";
+let lastBasePrompt = null;
+
+// --- Format selector pills ---
+document.querySelectorAll(".format-pill").forEach((pill) => {
+  pill.addEventListener("click", () => {
+    document.querySelectorAll(".format-pill").forEach((p) => p.classList.remove("active"));
+    pill.classList.add("active");
+    currentFormat = pill.dataset.fmt;
+    if (lastBasePrompt) {
+      output.value = formatPromptOutput(lastBasePrompt, currentFormat, modelSelect.value, sfwToggle.checked);
+    }
+  });
+});
+
+function formatPromptOutput(baseText, format, model, sfw) {
+  switch (format) {
+    case "flux":
+      return `A striking, hyper-realistic composition featuring ${baseText}. Natural ambient light, lifelike skin pores and reflections, realistic lens falloff, modern photographic color palette, authentic detail.`;
+    case "midjourney":
+      return `${baseText}, 35mm photography, soft cinematic rim light, photorealistic, natural skin texture, editorial styling --ar 16:9 --style raw --v 6.1 --stylize 250`;
+    case "comfyui":
+      return `POSITIVE PROMPT:\n${baseText}, masterwork, ultra-detailed skin textures, natural subsurface scattering, 8k resolution, shot on 85mm f/1.4 lens, professional color grading\n\nNEGATIVE PROMPT:\nugly, deformed, airbrushed, cartoon, 3d render, plastic skin, bad hands, mutated fingers, extra limbs, watermark, blurry`;
+    case "video":
+      return `Slow cinematic dolly forward tracking shot of ${baseText}. Natural eye contact, subtle wind motion through hair, organic subject movement, depth-of-field parallax, 24fps film cadence, smooth physics.`;
+    case "json":
+      return JSON.stringify({
+        subject: baseText,
+        target_model: model,
+        lighting: "cinematic daylight with subtle rim highlights",
+        camera: "85mm f/1.4 telephoto portrait lens",
+        color_grading: "editorial magazine palette",
+        sfw_filter: sfw
+      }, null, 2);
+    default:
+      return baseText;
+  }
+}
+
 
 // --- Tab switching ---
 function switchTab(tab) {
@@ -344,15 +383,17 @@ submitBtn.addEventListener("click", async () => {
 
   // If remote backend succeeded
   if (promptResult) {
-    output.value = promptResult;
+    lastBasePrompt = promptResult;
+    const formatted = formatPromptOutput(promptResult, currentFormat, model, sfw);
+    output.value = formatted;
     outputWrap.hidden = false;
     setStatus("Done.");
     if (typeof remainingResult === "number") {
       updateUsageBar(remainingResult, limitResult);
       chrome.storage.local.set({ remainingQuota: remainingResult, limitQuota: limitResult });
     }
-    chrome.storage.session.set({ promptText: promptResult }).catch(() => {});
-    await saveToHistory(imageDataUrl, promptResult, model, sfw);
+    chrome.storage.session.set({ promptText: formatted }).catch(() => {});
+    await saveToHistory(imageDataUrl, formatted, model, sfw);
     updateSubmitState();
     return;
   }
@@ -366,12 +407,14 @@ submitBtn.addEventListener("click", async () => {
     chrome.storage.local.set({ remainingQuota: rem, limitQuota: lim });
 
     promptResult = synthesizeLocalPrompt(model, sfw);
-    output.value = promptResult;
+    lastBasePrompt = promptResult;
+    const formatted = formatPromptOutput(promptResult, currentFormat, model, sfw);
+    output.value = formatted;
     outputWrap.hidden = false;
     setStatus("Done.");
     updateUsageBar(rem, lim);
-    chrome.storage.session.set({ promptText: promptResult }).catch(() => {});
-    await saveToHistory(imageDataUrl, promptResult, model, sfw);
+    chrome.storage.session.set({ promptText: formatted }).catch(() => {});
+    await saveToHistory(imageDataUrl, formatted, model, sfw);
     updateSubmitState();
   });
 });

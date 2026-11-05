@@ -5,12 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>halalfans.me — Run Your Own AI Influencers & ComfyUI Creator Suite</title>
   <meta name="description" content="Start with the plug-and-play workflows, tutorials and prompts for creating consistent AI characters and ready-to-post content. Powered by halalfans.me.">
+  <link rel="canonical" href="https://halalfans.me/">
   <link rel="icon" type="image/png" href="assets/store_icon_128.png">
+
+  <!-- Open Graph / SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://halalfans.me/">
+  <meta property="og:title" content="halalfans.me — Run Your Own AI Influencers & ComfyUI Creator Suite">
+  <meta property="og:description" content="Plug-and-play ComfyUI workflows, character consistency, LoRA training, and reverse-prompting for AI creators.">
+  <meta property="og:image" content="https://halalfans.me/assets/promo_marquee_1400x560.jpg">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Schema.org FAQPage for Google Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I run these workflows on my computer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! If you have a Windows PC with an NVIDIA GPU (RTX 2060 or newer with 6GB+ VRAM) or an Apple Silicon Mac (M1/M2/M3/M4 with 16GB+ memory), you can run everything 100% locally for free. 1-click RunPod cloud templates are also included."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need coding experience or Python skills?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Zero coding required. ComfyUI uses a visual drag-and-drop interface, and we provide pre-packaged .json blueprints ready to load and generate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the img2prompt Chrome extension work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The img2prompt extension lets you right-click any photo on the web or paste an image, and instantly extracts the lighting, camera focal length, atmosphere, and styling into an optimized prompt format for Flux, Midjourney, and ComfyUI."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this a monthly subscription?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, it is a single one-time payment of €47 EUR for lifetime access to all 7 workflows, 13 video tutorials, 2 growth playbooks, and continuous updates without recurring fees."
+        }
+      }
+    ]
+  }
+  </script>
 
   <style>
     :root {
@@ -319,6 +369,112 @@
       max-width: 600px;
       line-height: 1.45;
       margin: 16px auto;
+    }
+
+    /* Free Playground Lead Magnet Section */
+    section.playground-section {
+      padding: 60px 0 70px;
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+    }
+
+    .playground-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      max-width: 820px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-md);
+    }
+
+    .playground-pills {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .p-pill {
+      background: #ffffff;
+      border: 1px solid var(--border-strong);
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .p-pill.active {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+    }
+
+    .dropzone-box {
+      border: 2px dashed #94a3b8;
+      border-radius: var(--radius-md);
+      padding: 32px 20px;
+      text-align: center;
+      background: #ffffff;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-bottom: 20px;
+    }
+
+    .dropzone-box:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .playground-preview-img {
+      max-height: 220px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .playground-prompt-output {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      line-height: 1.5;
+      text-align: left;
+      margin: 18px 0;
+      white-space: pre-wrap;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+
+    .lead-banner-box {
+      background: linear-gradient(135deg, #eff6ff, #f5f3ff);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .lead-banner-text h5 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 4px;
+    }
+
+    .lead-banner-text p {
+      font-size: 0.86rem;
+      color: #3b82f6;
     }
 
     /* Carousel Cards Showcase */
@@ -1188,11 +1344,12 @@
   <!-- Top Sticky Navigation -->
   <header class="site-header">
     <div class="container nav-inner">
-      <a href="halalfans.html" class="brand-logo">
+      <a href="https://halalfans.me" class="brand-logo">
         <span>halalfans.me</span>
         <span class="brand-badge">Pro Suite</span>
       </a>
       <nav class="nav-links">
+        <a href="#playground" class="nav-link">Free Tester</a>
         <a href="#workflows" class="nav-link">7 Workflows</a>
         <a href="#comparison" class="nav-link">Before / After</a>
         <a href="#hardware" class="nav-link">Hardware Checker</a>
@@ -1220,8 +1377,8 @@
             <span>Get instant access · €47,00 EUR</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a href="index.html" class="btn-secondary-lg">
-            <span>Open img2prompt Extension & Web Panel</span>
+          <a href="#playground" class="btn-secondary-lg">
+            <span>Try Free Web Prompt Generator ↓</span>
           </a>
           <p class="hero-disclaimer">Instant access · One-time payment · No subscription · Direct updates</p>
         </div>
@@ -1259,7 +1416,64 @@
     </div>
   </section>
 
-  <!-- Section 2: Cards Carousel / Model Fan Showcase -->
+  <!-- Section 2: Free Interactive Web Playground -->
+  <section class="playground-section" id="playground">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Free Image to Prompt Playground</h2>
+        <p class="section-sub">Test our visual reverse-prompting engine right now in your browser. Choose your target format.</p>
+      </div>
+
+      <div class="playground-card">
+        <div class="playground-pills">
+          <button class="p-pill active" onclick="setPlaygroundFormat('flux')">Flux</button>
+          <button class="p-pill" onclick="setPlaygroundFormat('midjourney')">Midjourney</button>
+          <button class="p-pill" onclick="setPlaygroundFormat('comfyui')">ComfyUI (Pos / Neg)</button>
+          <button class="p-pill" onclick="setPlaygroundFormat('video')">Image-to-Video</button>
+          <button class="p-pill" onclick="setPlaygroundFormat('json')">JSON / Structured</button>
+        </div>
+
+        <div class="dropzone-box" onclick="document.getElementById('web-file-input').click()">
+          <input type="file" id="web-file-input" accept="image/*" style="display:none;" onchange="handleWebFileUpload(event)">
+          <img id="playground-preview" class="playground-preview-img" src="" alt="Preview">
+          <div id="dropzone-text">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" style="margin-bottom:8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <p style="font-weight:700; font-size:1.02rem; color:#0f172a;">Drag & drop an image, or click to upload</p>
+            <p style="font-size:0.84rem; color:var(--text-dim); margin-top:4px;">Supports JPG, PNG, WEBP (or click "Load Editorial Sample" below)</p>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:10px; margin-bottom:14px;">
+          <button class="btn-secondary-lg" style="max-width:240px; padding:8px 16px; font-size:0.88rem;" onclick="loadEditorialSample()">
+            ✨ Load Editorial Sample
+          </button>
+          <button class="btn-primary-lg" style="max-width:240px; padding:8px 16px; font-size:0.88rem;" onclick="generatePlaygroundPrompt()">
+            ⚡ Generate Prompt
+          </button>
+        </div>
+
+        <div id="playground-output-wrap" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <span style="font-size:0.82rem; font-weight:700; color:var(--text-dim); text-transform:uppercase;">Generated Model-Ready Prompt</span>
+            <button class="btn-secondary-lg" style="max-width:120px; padding:4px 10px; font-size:0.8rem;" onclick="copyPlaygroundOutput()">Copy Prompt</button>
+          </div>
+          <div class="playground-prompt-output" id="playground-output"></div>
+        </div>
+
+        <div class="lead-banner-box">
+          <div class="lead-banner-text">
+            <h5>Tired of manual tab switching?</h5>
+            <p>Get the 1-click Chrome Extension + all 7 ComfyUI influencer workflows to reverse-prompt anything online instantly.</p>
+          </div>
+          <a href="#checkout" class="btn-primary-lg" style="max-width:200px; padding:10px 18px; font-size:0.88rem;">
+            Get Full Suite · €47
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Cards Carousel / Model Fan Showcase -->
   <section class="carousel-section">
     <div class="container">
       <div class="carousel-header">
@@ -1307,7 +1521,7 @@
     </div>
   </section>
 
-  <!-- Section 3: The users speak for themselves (Receipts / Proof) -->
+  <!-- Section 4: The users speak for themselves (Receipts / Proof) -->
   <section class="testimonials-section">
     <div class="container">
       <div class="section-head">
@@ -1361,7 +1575,7 @@
     </div>
   </section>
 
-  <!-- Section 4: 7 Plug-and-Play Workflows & Before/After Comparison -->
+  <!-- Section 5: 7 Plug-and-Play Workflows & Before/After Comparison -->
   <section class="comparison-section" id="comparison">
     <div class="container">
       <div class="section-head" id="workflows">
@@ -1467,7 +1681,7 @@
     </div>
   </section>
 
-  <!-- Section 5: 20 Seconds Local Generation Speed Dial -->
+  <!-- Section 6: 20 Seconds Local Generation Speed Dial -->
   <section class="speed-section">
     <div class="container">
       <div class="speed-gauge-card">
@@ -1509,7 +1723,7 @@
     </div>
   </section>
 
-  <!-- Section 6: Hardware Compatibility Checker -->
+  <!-- Section 7: Hardware Compatibility Checker -->
   <section class="hardware-section" id="hardware">
     <div class="container">
       <div class="section-head">
@@ -1569,7 +1783,7 @@
     </div>
   </section>
 
-  <!-- Section 7: What People Are Building -->
+  <!-- Section 8: What People Are Building -->
   <section class="creators-grid-section" id="results">
     <div class="container">
       <div class="section-head">
@@ -1641,7 +1855,7 @@
     </div>
   </section>
 
-  <!-- Section 8: Everything You Could Ever Need (Checkout Section) -->
+  <!-- Section 9: Everything You Could Ever Need (Checkout Section) -->
   <section class="bundle-checkout-section" id="checkout">
     <div class="container">
       <div class="checkout-card">
@@ -1706,7 +1920,7 @@
     </div>
   </section>
 
-  <!-- Section 9: Frequently Asked Questions -->
+  <!-- Section 10: Frequently Asked Questions -->
   <section class="faq-section" id="faq">
     <div class="container">
       <div class="section-head">
@@ -1781,10 +1995,11 @@
           <div class="footer-col">
             <h5>Product</h5>
             <ul>
+              <li><a href="#playground">Free Prompt Tester</a></li>
               <li><a href="#workflows">7 ComfyUI Blueprints</a></li>
               <li><a href="#comparison">Skin & Texture Enhancement</a></li>
               <li><a href="#hardware">Hardware Diagnostics</a></li>
-              <li><a href="index.html">img2prompt Extension</a></li>
+              <li><a href="extension.html">img2prompt Extension</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -1908,6 +2123,83 @@
         generateUserLicense();
         document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' });
       }
+    }
+
+    // --- Free Playground Logic ---
+    let playgroundFormat = 'flux';
+    let currentImageBase = null;
+
+    function setPlaygroundFormat(fmt) {
+      playgroundFormat = fmt;
+      document.querySelectorAll('.p-pill').forEach(p => p.classList.remove('active'));
+      const activePill = Array.from(document.querySelectorAll('.p-pill')).find(p => p.textContent.toLowerCase().includes(fmt));
+      if (activePill) activePill.classList.add('active');
+      if (document.getElementById('playground-output-wrap').style.display !== 'none') {
+        generatePlaygroundPrompt();
+      }
+    }
+
+    function handleWebFileUpload(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          showPlaygroundPreview(ev.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function loadEditorialSample() {
+      showPlaygroundPreview('assets/editorial_portrait_new.jpg');
+      generatePlaygroundPrompt();
+    }
+
+    function showPlaygroundPreview(src) {
+      currentImageBase = src;
+      const previewEl = document.getElementById('playground-preview');
+      previewEl.src = src;
+      previewEl.style.display = 'block';
+      document.getElementById('dropzone-text').style.display = 'none';
+    }
+
+    function generatePlaygroundPrompt() {
+      const outputWrap = document.getElementById('playground-output-wrap');
+      const outputEl = document.getElementById('playground-output');
+      outputWrap.style.display = 'block';
+
+      const base = "A captivating editorial portrait of an elegant woman with delicate features, intricate realistic skin pores, and natural evening makeup. Warm ambient light with gentle specular reflections, shot on an 85mm f/1.4 lens with shallow depth-of-field";
+
+      switch(playgroundFormat) {
+        case 'flux':
+          outputEl.textContent = `${base}. Highly detailed photorealistic fashion photography, true-to-life color grading, cinematic quality, 8k resolution.`;
+          break;
+        case 'midjourney':
+          outputEl.textContent = `${base}, luxury lifestyle editorial, 35mm photography, soft rim light --ar 16:9 --style raw --v 6.1 --stylize 250`;
+          break;
+        case 'comfyui':
+          outputEl.textContent = `POSITIVE PROMPT:\n${base}, masterpiece, ultra-detailed skin textures, 8k uhd, cinematic backlight, photorealistic\n\nNEGATIVE PROMPT:\nugly, deformed, airbrushed, cartoon, 3d render, plastic skin, bad hands, mutated fingers, extra limbs, watermark, blurry`;
+          break;
+        case 'video':
+          outputEl.textContent = `Slow cinematic dolly forward push-in on subject. Natural eye contact, gentle breeze flowing through dark hair strands, subtle organic motion, dynamic background bokeh parallax, 24fps film motion.`;
+          break;
+        case 'json':
+          outputEl.textContent = JSON.stringify({
+            subject: "editorial female portrait",
+            camera: "85mm f/1.4 lens",
+            lighting: "warm ambient with soft rim illumination",
+            composition: "medium close-up, rule of thirds",
+            skin_texture: "hyper-realistic, unretouched pores and micro-details",
+            target_engine: "halalfans.me ComfyUI realism pipeline"
+          }, null, 2);
+          break;
+      }
+    }
+
+    function copyPlaygroundOutput() {
+      const text = document.getElementById('playground-output').textContent;
+      navigator.clipboard.writeText(text);
+      alert('Prompt copied to clipboard!');
     }
   </script>
 </body>
