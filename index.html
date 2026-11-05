@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>halalfans.me — Run Your Own AI Influencers & ComfyUI Creator Suite</title>
-  <meta name="description" content="Start with the plug-and-play workflows, tutorials and prompts for creating consistent AI characters and ready-to-post content. Powered by halalfans.me.">
+  <title>halalfans.me — Run Your Own AI Influencers with Higgsfield & ComfyUI</title>
+  <meta name="description" content="Start with plug-and-play Higgsfield & ComfyUI workflows, tutorials and prompts for creating consistent AI characters and ready-to-post content. Powered by halalfans.me.">
   <link rel="canonical" href="https://halalfans.me/">
   <link rel="icon" type="image/png" href="assets/store_icon_128.png">
 
   <!-- Open Graph / SEO -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://halalfans.me/">
-  <meta property="og:title" content="halalfans.me — Run Your Own AI Influencers & ComfyUI Creator Suite">
-  <meta property="og:description" content="Plug-and-play ComfyUI workflows, character consistency, LoRA training, and reverse-prompting for AI creators.">
+  <meta property="og:title" content="halalfans.me — Run Your Own AI Influencers with Higgsfield & ComfyUI">
+  <meta property="og:description" content="Plug-and-play workflows, character consistency, cinematic video motion, and reverse-prompting for AI creators.">
   <meta property="og:image" content="https://halalfans.me/assets/promo_marquee_1400x560.jpg">
 
   <!-- Google Fonts -->
@@ -39,7 +39,7 @@
         "name": "Do I need coding experience or Python skills?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Zero coding required. ComfyUI uses a visual drag-and-drop interface, and we provide pre-packaged .json blueprints ready to load and generate."
+          "text": "Zero coding required. ComfyUI and Higgsfield use visual drag-and-drop interfaces, and we provide pre-packaged .json blueprints ready to load and generate."
         }
       },
       {
@@ -124,15 +124,16 @@
       padding: 0 20px;
     }
 
-    /* Top Nav */
+    /* Minimalist Header Navigation (Muzecast / Muzeboard / HeyGen Inspired, NO CTAs) */
     header.site-header {
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 0;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      padding: 16px 0;
     }
 
     .nav-inner {
@@ -144,62 +145,63 @@
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       text-decoration: none;
       color: var(--primary);
-      font-weight: 800;
-      font-size: 1.25rem;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    .brand-badge {
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
-      color: #fff;
-      font-size: 0.72rem;
       font-weight: 700;
-      padding: 3px 8px;
-      border-radius: var(--radius-pill);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      font-size: 1.15rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: -0.03em;
     }
 
-    .nav-links {
+    .brand-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #2563eb;
+      display: inline-block;
+    }
+
+    .nav-menu {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 28px;
+    }
+
+    .nav-item {
+      position: relative;
     }
 
     .nav-link {
       text-decoration: none;
-      color: var(--text-muted);
-      font-size: 0.92rem;
+      color: #64748b;
+      font-size: 0.9rem;
       font-weight: 500;
-      transition: var(--transition);
+      transition: color 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 0;
     }
 
     .nav-link:hover {
-      color: var(--primary);
+      color: #0f172a;
     }
 
-    .btn-nav {
-      background: var(--primary);
-      color: #ffffff;
-      padding: 8px 18px;
-      border-radius: var(--radius-pill);
-      text-decoration: none;
+    /* Sub-nav indicator */
+    .nav-tag {
+      font-size: 0.68rem;
+      background: #f1f5f9;
+      color: #475569;
+      padding: 2px 6px;
+      border-radius: 4px;
       font-weight: 600;
-      font-size: 0.88rem;
-      transition: var(--transition);
-    }
-
-    .btn-nav:hover {
-      background: var(--primary-hover);
-      transform: translateY(-1px);
+      margin-left: 2px;
     }
 
     /* Hero Section */
     section.hero-section {
-      padding: 44px 0 60px;
+      padding: 36px 0 60px;
     }
 
     .hero-media-wrapper {
@@ -208,27 +210,26 @@
       overflow: hidden;
       box-shadow: var(--shadow-lg);
       border: 1px solid var(--border);
-      max-height: 520px;
-      margin-bottom: 32px;
+      height: 520px;
+      margin-bottom: 36px;
       background: #000;
     }
 
-    .hero-media-img {
+    .hero-media-video {
       width: 100%;
-      height: 520px;
+      height: 100%;
       object-fit: cover;
-      object-position: center 25%;
       display: block;
     }
 
     .hero-media-badge {
       position: absolute;
-      bottom: 18px;
-      left: 18px;
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(10px);
+      bottom: 20px;
+      left: 20px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
       color: #ffffff;
-      padding: 6px 14px;
+      padding: 7px 16px;
       border-radius: var(--radius-pill);
       font-size: 0.82rem;
       font-weight: 600;
@@ -240,10 +241,11 @@
     }
 
     .hero-title {
-      font-size: 2.85rem;
-      line-height: 1.18;
+      font-size: 2.9rem;
+      line-height: 1.16;
       font-weight: 800;
       margin-bottom: 16px;
+      letter-spacing: -0.035em;
     }
 
     .hero-desc {
@@ -477,7 +479,7 @@
       color: #3b82f6;
     }
 
-    /* Carousel Cards Showcase */
+    /* Video Carousel / Higgsfield Model Showcase */
     section.carousel-section {
       padding: 50px 0 70px;
       background: var(--bg-subtle);
@@ -512,7 +514,7 @@
 
     .fan-card {
       flex: 0 0 280px;
-      height: 380px;
+      height: 420px;
       border-radius: var(--radius-md);
       overflow: hidden;
       position: relative;
@@ -527,10 +529,11 @@
       transform: translateY(-6px);
     }
 
-    .fan-card img {
+    .fan-card video {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .fan-card-info {
@@ -742,7 +745,7 @@
       background: #f1f5f9;
     }
 
-    .pane-img-wrap img {
+    .pane-img-wrap img, .pane-img-wrap video {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -975,7 +978,7 @@
       line-height: 1.45;
     }
 
-    /* What People Are Building Grid */
+    /* What People Are Building Grid (Higgsfield Reels) */
     section.creators-grid-section {
       padding: 80px 0;
     }
@@ -1041,14 +1044,16 @@
     }
 
     .creator-post-media {
-      height: 240px;
+      height: 320px;
       background: #000;
+      overflow: hidden;
     }
 
-    .creator-post-media img {
+    .creator-post-media video {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     /* Bundle Checkout Offer Section */
@@ -1331,41 +1336,70 @@
     }
 
     /* Responsive */
-    @media (max-width: 768px) {
+    @media (max-width: 860px) {
       .hero-title { font-size: 2.1rem; }
       .split-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .nav-menu { display: none; }
       .speed-metrics-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Sticky Navigation -->
+  <!-- Minimalist Header (Muzecast / Muzeboard / HeyGen Inspired, NO CTAs) -->
   <header class="site-header">
     <div class="container nav-inner">
       <a href="https://halalfans.me" class="brand-logo">
+        <span class="brand-dot"></span>
         <span>halalfans.me</span>
-        <span class="brand-badge">Pro Suite</span>
       </a>
-      <nav class="nav-links">
-        <a href="#playground" class="nav-link">Free Tester</a>
-        <a href="#workflows" class="nav-link">7 Workflows</a>
-        <a href="#comparison" class="nav-link">Before / After</a>
-        <a href="#hardware" class="nav-link">Hardware Checker</a>
-        <a href="#results" class="nav-link">Creator Results</a>
-        <a href="#faq" class="nav-link">FAQ</a>
+
+      <!-- Minimalist Workflow & Use Case Navigation -->
+      <nav class="nav-menu">
+        <div class="nav-item">
+          <a href="#workflows" class="nav-link">
+            <span>Workflows</span>
+            <span class="nav-tag">7 Suite</span>
+          </a>
+        </div>
+        <div class="nav-item">
+          <a href="#comparison" class="nav-link">
+            <span>Use Cases</span>
+          </a>
+        </div>
+        <div class="nav-item">
+          <a href="#playground" class="nav-link">
+            <span>Live Tester</span>
+          </a>
+        </div>
+        <div class="nav-item">
+          <a href="#hardware" class="nav-link">
+            <span>Hardware Specs</span>
+          </a>
+        </div>
+        <div class="nav-item">
+          <a href="#results" class="nav-link">
+            <span>Creators</span>
+          </a>
+        </div>
+        <div class="nav-item">
+          <a href="#faq" class="nav-link">
+            <span>FAQ</span>
+          </a>
+        </div>
       </nav>
-      <a href="#checkout" class="btn-nav">Get Access · €47</a>
     </div>
   </header>
 
-  <!-- Section 1: Hero -->
+  <!-- Section 1: Hero with Cinematic Higgsfield Video -->
   <section class="hero-section">
     <div class="container-narrow">
       <div class="hero-media-wrapper">
-        <img src="assets/editorial_portrait_new.jpg" alt="halalfans.me AI Influencer generation" class="hero-media-img">
-        <div class="hero-media-badge">✨ Made with halalfans.me</div>
+        <video autoplay muted loop playsinline poster="assets/higgsfield/poster_1.webp" class="hero-media-video">
+          <source src="assets/higgsfield/hero_cinematic.mp4" type="video/mp4">
+          <source src="https://static-public-media.higgsfield.ai/cards/b6c4b359-bce7-489b-99ca-b8dc0fb00cbd.mp4" type="video/mp4">
+        </video>
+        <div class="hero-media-badge">✨ Generated with Higgsfield & halalfans.me</div>
       </div>
 
       <div class="hero-content">
@@ -1473,8 +1507,8 @@
     </div>
   </section>
 
-  <!-- Section 3: Cards Carousel / Model Fan Showcase -->
-  <section class="carousel-section">
+  <!-- Section 3: Video Cards Carousel (Live Higgsfield Generation Reels) -->
+  <section class="carousel-section" id="use-cases">
     <div class="container">
       <div class="carousel-header">
         <h2 class="carousel-title">Unlimited Aesthetics & Creator Styles</h2>
@@ -1483,38 +1517,57 @@
 
       <div class="cards-row">
         <div class="fan-card">
-          <img src="assets/editorial_portrait_new.jpg" alt="Model Amber">
+          <video autoplay muted loop playsinline poster="assets/higgsfield/poster_1.webp">
+            <source src="assets/higgsfield/reel_fashion.mp4" type="video/mp4">
+            <source src="https://static-public-media.higgsfield.ai/ai-reels-presets/151c3495-8cda-4adb-ade0-3485ee6acbf5.mp4" type="video/mp4">
+          </video>
           <div class="fan-card-info">
             <h4 class="fan-card-name">Amber Cole</h4>
             <p class="fan-card-tag">Editorial & High Fashion • 140k followers</p>
           </div>
         </div>
+
         <div class="fan-card">
-          <img src="assets/motion_cinematic_new.jpg" alt="Model Maya">
+          <video autoplay muted loop playsinline poster="assets/higgsfield/poster_2.webp">
+            <source src="assets/higgsfield/model_motion_1.mp4" type="video/mp4">
+            <source src="https://static-public-media.higgsfield.ai/cards/f3354df7-9f8c-4b63-82af-2c69cb780b7a.mp4" type="video/mp4">
+          </video>
           <div class="fan-card-info">
             <h4 class="fan-card-name">Maya Lin</h4>
-            <p class="fan-card-tag">Cinematic Outdoor & Hicksfield Motion</p>
+            <p class="fan-card-tag">Cinematic Outdoor & Higgsfield Motion</p>
           </div>
         </div>
+
         <div class="fan-card">
-          <img src="assets/commercial_product_new.jpg" alt="Model Sofia">
+          <video autoplay muted loop playsinline poster="assets/higgsfield/poster_3.webp">
+            <source src="assets/higgsfield/hero_cinematic.mp4" type="video/mp4">
+            <source src="https://static-public-media.higgsfield.ai/cards/b6c4b359-bce7-489b-99ca-b8dc0fb00cbd.mp4" type="video/mp4">
+          </video>
           <div class="fan-card-info">
             <h4 class="fan-card-name">Sofia V.</h4>
             <p class="fan-card-tag">Commercial Luxury & Product Endorsement</p>
           </div>
         </div>
+
         <div class="fan-card">
-          <img src="assets/comparison_skin_after.jpg" alt="Model Elena">
+          <video autoplay muted loop playsinline poster="assets/higgsfield/poster_1.webp">
+            <source src="assets/higgsfield/creator_aria.mp4" type="video/mp4">
+            <source src="https://static-public-media.higgsfield.ai/ai-reels-presets/273a3cff-88c8-44b9-950b-ef2e4aaf89ca.mp4" type="video/mp4">
+          </video>
           <div class="fan-card-info">
             <h4 class="fan-card-name">Elena Rose</h4>
             <p class="fan-card-tag">Pore-Level Daylight Realism</p>
           </div>
         </div>
+
         <div class="fan-card">
-          <img src="assets/sample_image.jpg" alt="Model Jasmine">
+          <video autoplay muted loop playsinline poster="assets/higgsfield/poster_2.webp">
+            <source src="assets/higgsfield/creator_chloe.mp4" type="video/mp4">
+            <source src="https://static-public-media.higgsfield.ai/ai-reels-presets/38abb925-60f2-4abf-920a-5a903b79094b.mp4" type="video/mp4">
+          </video>
           <div class="fan-card-info">
-            <h4 class="fan-card-name">Jasmine K.</h4>
-            <p class="fan-card-tag">Lifestyle & Travel Influencer</p>
+            <h4 class="fan-card-name">Chloe</h4>
+            <p class="fan-card-tag">Lifestyle & Travel Reel Influencer</p>
           </div>
         </div>
       </div>
@@ -1587,7 +1640,7 @@
       <div class="compare-tabs">
         <button class="compare-tab-btn active" onclick="switchTab('skin')">Skin Texture & Micro-Detail</button>
         <button class="compare-tab-btn" onclick="switchTab('faceswap')">Facial Consistency & Angles</button>
-        <button class="compare-tab-btn" onclick="switchTab('motion')">Cinematic Motion (Hicksfield)</button>
+        <button class="compare-tab-btn" onclick="switchTab('motion')">Cinematic Motion (Higgsfield)</button>
       </div>
 
       <div class="compare-box">
@@ -1649,11 +1702,11 @@
           </div>
         </div>
 
-        <!-- Motion Tab -->
+        <!-- Motion Tab with Real Higgsfield Cinematic Video Loop -->
         <div id="tab-motion" class="split-grid" style="display:none;">
           <div class="card-pane">
             <div class="pane-header">
-              <span>Static Still Photo</span>
+              <span>Static Still Frame</span>
               <span class="tag-before">Before</span>
             </div>
             <div class="pane-img-wrap">
@@ -1666,11 +1719,14 @@
 
           <div class="card-pane">
             <div class="pane-header">
-              <span>Hicksfield Video Motion</span>
+              <span>Higgsfield Video Motion</span>
               <span class="tag-after">After</span>
             </div>
             <div class="pane-img-wrap">
-              <img src="assets/motion_cinematic_new.jpg" alt="Cinematic Motion">
+              <video autoplay muted loop playsinline poster="assets/higgsfield/poster_2.webp">
+                <source src="assets/higgsfield/model_motion_1.mp4" type="video/mp4">
+                <source src="https://static-public-media.higgsfield.ai/cards/f3354df7-9f8c-4b63-82af-2c69cb780b7a.mp4" type="video/mp4">
+              </video>
             </div>
             <div class="pane-caption">
               Fluid organic motion, dynamic camera parallax, hair physics, and breathing movement ready for TikTok & Reels.
@@ -1776,14 +1832,14 @@
         <div class="hw-result-box" id="hw-result">
           <div class="hw-result-title" id="hw-status">✅ Perfect Compatibility</div>
           <div class="hw-result-desc" id="hw-desc">
-            Your hardware will generate ultra-high resolution images in <strong>15–22 seconds</strong> locally. Full support for Hicksfield motion and 8K upscaling.
+            Your hardware will generate ultra-high resolution images in <strong>15–22 seconds</strong> locally. Full support for Higgsfield motion and 8K upscaling.
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Section 8: What People Are Building -->
+  <!-- Section 8: What People Are Building (Higgsfield Video Reels) -->
   <section class="creators-grid-section" id="results">
     <div class="container">
       <div class="section-head">
@@ -1808,7 +1864,10 @@
             <span><strong>€4.2k</strong> / post deal</span>
           </div>
           <div class="creator-post-media">
-            <img src="assets/editorial_portrait_new.jpg" alt="Aria post">
+            <video autoplay muted loop playsinline poster="assets/higgsfield/poster_1.webp">
+              <source src="assets/higgsfield/creator_aria.mp4" type="video/mp4">
+              <source src="https://static-public-media.higgsfield.ai/ai-reels-presets/273a3cff-88c8-44b9-950b-ef2e4aaf89ca.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
 
@@ -1828,7 +1887,10 @@
             <span><strong>€7.1k</strong> / month</span>
           </div>
           <div class="creator-post-media">
-            <img src="assets/motion_cinematic_new.jpg" alt="Chloe post">
+            <video autoplay muted loop playsinline poster="assets/higgsfield/poster_2.webp">
+              <source src="assets/higgsfield/creator_chloe.mp4" type="video/mp4">
+              <source src="https://static-public-media.higgsfield.ai/ai-reels-presets/38abb925-60f2-4abf-920a-5a903b79094b.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
 
@@ -1848,7 +1910,10 @@
             <span><strong>4 Brand</strong> contracts</span>
           </div>
           <div class="creator-post-media">
-            <img src="assets/commercial_product_new.jpg" alt="Valeria post">
+            <video autoplay muted loop playsinline poster="assets/higgsfield/poster_3.webp">
+              <source src="assets/higgsfield/creator_valeria.mp4" type="video/mp4">
+              <source src="https://static-public-media.higgsfield.ai/ai-reels-presets/1c1caa5e-cee3-488e-b328-9c276efb8d6b.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
       </div>
@@ -1873,7 +1938,7 @@
         <ul class="bundle-items-list">
           <li>
             <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            <span><strong>7 Plug-and-Play ComfyUI Workflows</strong> (.json node blueprints)</span>
+            <span><strong>7 Plug-and-Play ComfyUI & Higgsfield Workflows</strong> (.json node blueprints)</span>
           </li>
           <li>
             <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1945,7 +2010,7 @@
             <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-answer">
-            Zero coding required. ComfyUI uses a visual drag-and-drop interface, and we provide pre-packaged .json workflows. You simply drop the file onto your screen, load your reference image, and press Generate.
+            Zero coding required. ComfyUI and Higgsfield use visual drag-and-drop interfaces, and we provide pre-packaged .json workflows. You simply drop the file onto your screen, load your reference image, and press Generate.
           </div>
         </div>
 
@@ -1993,7 +2058,7 @@
 
         <div class="footer-links-group">
           <div class="footer-col">
-            <h5>Product</h5>
+            <h5>Workflows & Product</h5>
             <ul>
               <li><a href="#playground">Free Prompt Tester</a></li>
               <li><a href="#workflows">7 ComfyUI Blueprints</a></li>
@@ -2063,7 +2128,7 @@
 
         if (vram >= 12 && ram >= 32) {
           resTitle.textContent = '✅ Blazing Fast Performance (15–20s)';
-          resDesc.innerHTML = 'Your GPU is ideal! You can run batch generation, Hicksfield motion models, and 8K upscale comfortably without swapping.';
+          resDesc.innerHTML = 'Your GPU is ideal! You can run batch generation, Higgsfield motion models, and 8K upscale comfortably without swapping.';
         } else if (vram >= 8) {
           resTitle.textContent = '⚡ Good Performance (25–35s)';
           resDesc.innerHTML = 'Fully supported! Standard SDXL and face-swap workflows will run smoothly with `--medvram` flag.';
@@ -2190,7 +2255,7 @@
             lighting: "warm ambient with soft rim illumination",
             composition: "medium close-up, rule of thirds",
             skin_texture: "hyper-realistic, unretouched pores and micro-details",
-            target_engine: "halalfans.me ComfyUI realism pipeline"
+            target_engine: "halalfans.me Higgsfield & ComfyUI pipeline"
           }, null, 2);
           break;
       }
