@@ -8,3 +8,4 @@ node_modules/
 video_frames/
 .env
 scratch/
+.vercel
