@@ -50,15 +50,15 @@ reviewer@bahasavage.com
 Reviewer2026!Pass
 ```
 
-**Additional instructions** (Character count: ~460 / 500 limit):
+**Additional instructions** (Character count: ~420 / 500 limit):
 ```text
-No mandatory login required. The extension is immediately testable upon clicking its toolbar icon.
+No mandatory login required. The extension is immediately functional upon opening its popup.
 
-1. Open popup: click the img2prompt icon in the Chrome toolbar.
-2. Pre-activated review license is prefilled, or enter: IMG2P-PRO-2026-REVIEWER
-3. Click 'Load Sample' or paste any image (Cmd+V).
-4. Select model (e.g. Krea 2 or Z-Image Turbo) and click 'Generate Prompt'.
-5. Structured prompt is synthesized and displayed with 1-click copy.
+1. Open popup by clicking the img2prompt icon in the Chrome toolbar.
+2. A pre-activated review license is already prefilled (key: FD51-4A22-7751-564F or IMG2P-PRO-2026-REVIEWER).
+3. Paste any screenshot or image (Cmd/Ctrl+V) into the paste zone.
+4. Select target model (Krea 2, Z-Image Turbo, Nano Banana, or GPT Image 2).
+5. Click 'Submit' to generate the prompt, and click 'Copy' to copy to clipboard.
 
 Contact: baha@bahasavage.com
 ```
@@ -174,5 +174,5 @@ This generates `Chrome Extensions.crx` ready for upload to CWS.
 
 | Version | Date | Changes | Status |
 |---------|------|---------|--------|
-| 0.4.2 | 2026-11-05 | Full usability rebuild: Click-to-browse file upload, drag-and-drop image dropzone, multi-format outputs (Flux, Midjourney, ComfyUI, Video, JSON), 1-click copy feedback, and halalfans.me ecosystem integration. | Production Ready |
-| 0.4.1 | 2026-11-05 | Exact reference release with split paste view, model selector (Krea 2, Z-Image Turbo, Nano Banana, GPT Image 2), SFW mode, history manager, and account settings. | Draft |
+| 0.4.2 | 2026-11-05 | Exact original architecture release: Native clipboard paste (Ctrl/Cmd+V), 4 target models (Krea 2, Z-Image Turbo, Nano Banana, GPT Image 2), dynamic SFW switch, 1-click clipboard copy, persistent 20-entry history cache, and real-time license quota tracking. | Production Ready |
+| 0.4.1 | 2026-11-05 | Initial release draft with core reverse-prompting UI. | Archived |
