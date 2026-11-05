@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>img2prompt — halalfans.me</title>
+  <title>img2prompt</title>
   <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
@@ -25,57 +25,42 @@
 
   <!-- Generate tab -->
   <div id="panelGenerate" class="active">
-
-    <!-- Format selector pills -->
-    <div class="format-pills-row">
-      <button class="format-pill active" data-fmt="flux">Flux</button>
-      <button class="format-pill" data-fmt="midjourney">Midjourney</button>
-      <button class="format-pill" data-fmt="comfyui">ComfyUI</button>
-      <button class="format-pill" data-fmt="video">Video</button>
-      <button class="format-pill" data-fmt="json">JSON</button>
-    </div>
-
     <!-- Split row: paste zone left, controls right -->
     <div class="split-row">
       <div class="split-left">
-        <input type="file" id="fileInput" accept="image/*" style="display:none;" />
-        <div id="pasteZone" class="paste-zone" tabindex="0" title="Click to browse or paste image">
-          <span class="hint">Paste image<br/><small style="opacity:0.75;font-size:10px;">or click to browse</small></span>
+        <div id="pasteZone" class="paste-zone" tabindex="0">
+          <span class="hint">Paste image<br/>(Ctrl/Cmd+V)</span>
           <img id="preview" alt="" />
           <button id="clearImage" class="clear-btn" hidden>✕</button>
         </div>
       </div>
 
       <div class="split-right">
-        <label class="field-label">Target Model</label>
+        <label class="field-label">Model</label>
         <select id="model">
-          <option value="krea2">Krea 2 / Flux</option>
+          <option value="krea2">Krea 2</option>
           <option value="z-image">Z-Image Turbo</option>
           <option value="nano-banana">Nano Banana</option>
           <option value="image2">GPT Image 2</option>
         </select>
 
         <div id="sfwRow" class="sfw-row">
-          <span class="sfw-label">SFW filter</span>
+          <span class="sfw-label">SFW mode</span>
           <label class="toggle">
             <input type="checkbox" id="sfwToggle" />
             <span class="slider"></span>
           </label>
         </div>
 
-        <button id="submit" disabled>Generate Prompt</button>
+        <button id="submit" disabled>Submit</button>
       </div>
     </div>
 
     <div id="status" class="status"></div>
 
     <div id="outputWrap" class="output-wrap" hidden>
-      <textarea id="output" rows="6" readonly></textarea>
-      <button id="copy">Copy Prompt</button>
-    </div>
-
-    <div class="footer-badge">
-      <span>⚡ Powered by <a href="https://halalfans.me" target="_blank">halalfans.me</a> AI Engine</span>
+      <textarea id="output" rows="6"></textarea>
+      <button id="copy">Copy</button>
     </div>
   </div>
 
@@ -105,16 +90,16 @@
     <div class="account-divider"></div>
 
     <div class="account-section">
-      <label class="field-label">halalfans.me Creator Suite</label>
+      <label class="field-label">Subscription</label>
       <a href="https://halalfans.me" target="_blank" class="account-btn btn-accent" id="manageLicenseLink">
-        Get ComfyUI Blueprints & Pro License →
+        Get License Key · Instant Access
       </a>
     </div>
 
     <div class="account-section">
-      <label class="field-label">Support & Official Web Portal</label>
+      <label class="field-label">About</label>
       <a href="https://halalfans.me" target="_blank" class="account-btn btn-ghost">
-        halalfans.me Portal
+        img2prompt Official Website →
       </a>
     </div>
   </div>

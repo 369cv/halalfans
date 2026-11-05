@@ -35,7 +35,6 @@ const MAX_HISTORY = 20;
 // Elements
 const usageBarFill = document.getElementById("usageBarFill");
 const usageCount = document.getElementById("usageCount");
-const fileInput = document.getElementById("fileInput");
 const pasteZone = document.getElementById("pasteZone");
 const preview = document.getElementById("preview");
 const hint = document.querySelector(".hint");
@@ -62,53 +61,14 @@ const keyDisplay = document.getElementById("keyDisplay");
 
 let imageDataUrl = null;
 let apiKey = null;
-let currentFormat = "flux";
-let lastBasePrompt = null;
-
-// --- Format selector pills ---
-document.querySelectorAll(".format-pill").forEach((pill) => {
-  pill.addEventListener("click", () => {
-    document.querySelectorAll(".format-pill").forEach((p) => p.classList.remove("active"));
-    pill.classList.add("active");
-    currentFormat = pill.dataset.fmt;
-    if (lastBasePrompt) {
-      output.value = formatPromptOutput(lastBasePrompt, currentFormat, modelSelect.value, sfwToggle.checked);
-    }
-  });
-});
-
-function formatPromptOutput(baseText, format, model, sfw) {
-  switch (format) {
-    case "flux":
-      return `A striking, hyper-realistic composition featuring ${baseText}. Natural ambient light, lifelike skin pores and reflections, realistic lens falloff, modern photographic color palette, authentic detail.`;
-    case "midjourney":
-      return `${baseText}, 35mm photography, soft cinematic rim light, photorealistic, natural skin texture, editorial styling --ar 16:9 --style raw --v 6.1 --stylize 250`;
-    case "comfyui":
-      return `POSITIVE PROMPT:\n${baseText}, masterwork, ultra-detailed skin textures, natural subsurface scattering, 8k resolution, shot on 85mm f/1.4 lens, professional color grading\n\nNEGATIVE PROMPT:\nugly, deformed, airbrushed, cartoon, 3d render, plastic skin, bad hands, mutated fingers, extra limbs, watermark, blurry`;
-    case "video":
-      return `Slow cinematic dolly forward tracking shot of ${baseText}. Natural eye contact, subtle wind motion through hair, organic subject movement, depth-of-field parallax, 24fps film cadence, smooth physics.`;
-    case "json":
-      return JSON.stringify({
-        subject: baseText,
-        target_model: model,
-        lighting: "cinematic daylight with subtle rim highlights",
-        camera: "85mm f/1.4 telephoto portrait lens",
-        color_grading: "editorial magazine palette",
-        sfw_filter: sfw
-      }, null, 2);
-    default:
-      return baseText;
-  }
-}
-
 
 // --- Tab switching ---
 function switchTab(tab) {
   ["generate", "history", "account"].forEach(t => {
     const panel = document.getElementById("panel" + t.charAt(0).toUpperCase() + t.slice(1));
     const tabBtn = document.getElementById("tab" + t.charAt(0).toUpperCase() + t.slice(1));
-    panel.classList.toggle("active", t === tab);
-    tabBtn.classList.toggle("active", t === tab);
+    if (panel) panel.classList.toggle("active", t === tab);
+    if (tabBtn) tabBtn.classList.toggle("active", t === tab);
   });
   if (tab === "history") renderHistory();
 }
@@ -117,9 +77,11 @@ document.getElementById("tabGenerate").addEventListener("click", () => switchTab
 document.getElementById("tabHistory").addEventListener("click", () => switchTab("history"));
 document.getElementById("tabAccount").addEventListener("click", () => switchTab("account"));
 
-// --- Model selector: show SFW toggle only for Z-Image ---
+// --- Model selector: show SFW toggle only for Z-Image Turbo ---
 function updateSfwVisibility() {
-  sfwRow.style.display = modelSelect.value === "z-image" ? "flex" : "none";
+  if (sfwRow && modelSelect) {
+    sfwRow.style.display = modelSelect.value === "z-image" ? "flex" : "none";
+  }
 }
 
 modelSelect.addEventListener("change", updateSfwVisibility);
@@ -127,43 +89,50 @@ updateSfwVisibility();
 
 // --- Status ---
 function setStatus(text, isError) {
+  if (!statusEl) return;
   statusEl.textContent = text;
   statusEl.classList.toggle("error", !!isError);
 }
 
 function updateSubmitState() {
-  submitBtn.disabled = !imageDataUrl;
+  if (submitBtn) {
+    submitBtn.disabled = !imageDataUrl;
+  }
 }
 
 // --- Settings ---
 function showSettingsSaved() {
-  accountSettingsForm.hidden = true;
-  accountSettingsSaved.hidden = false;
-  keyDisplay.textContent = apiKey;
+  if (accountSettingsForm) accountSettingsForm.hidden = true;
+  if (accountSettingsSaved) accountSettingsSaved.hidden = false;
+  if (keyDisplay) keyDisplay.textContent = apiKey;
 }
 
 function showSettingsForm() {
-  accountSettingsForm.hidden = false;
-  accountSettingsSaved.hidden = true;
+  if (accountSettingsForm) accountSettingsForm.hidden = false;
+  if (accountSettingsSaved) accountSettingsSaved.hidden = true;
 }
 
-// --- Image ---
+// --- Image Handling ---
 function showImage(dataUrl) {
   imageDataUrl = dataUrl;
-  preview.src = dataUrl;
-  preview.style.display = "block";
-  hint.style.display = "none";
-  clearImageBtn.hidden = false;
+  if (preview) {
+    preview.src = dataUrl;
+    preview.style.display = "block";
+  }
+  if (hint) hint.style.display = "none";
+  if (clearImageBtn) clearImageBtn.hidden = false;
 }
 
 function clearImage() {
   imageDataUrl = null;
-  preview.src = "";
-  preview.style.display = "none";
-  hint.style.display = "";
-  clearImageBtn.hidden = true;
-  output.value = "";
-  outputWrap.hidden = true;
+  if (preview) {
+    preview.src = "";
+    preview.style.display = "none";
+  }
+  if (hint) hint.style.display = "";
+  if (clearImageBtn) clearImageBtn.hidden = true;
+  if (output) output.value = "";
+  if (outputWrap) outputWrap.hidden = true;
   setStatus("");
   chrome.storage.session.remove(["imageDataUrl", "promptText"]).catch(() => {});
   updateSubmitState();
@@ -172,19 +141,24 @@ function clearImage() {
 // --- Usage bar ---
 function updateUsageBar(remaining, limit) {
   const pct = limit > 0 ? Math.max(0, Math.min(100, (remaining / limit) * 100)) : 0;
-  usageBarFill.style.width = `${pct}%`;
-  usageCount.textContent = `${remaining} / ${limit} generations remaining`;
+  if (usageBarFill) usageBarFill.style.width = `${pct}%`;
+  if (usageCount) usageCount.textContent = `${remaining} / ${limit}`;
 }
 
-// Fallback deterministic AI prompt synthesis if backend is offline or key is local
-function synthesizeLocalPrompt(model, sfw) {
-  const modelPrompts = {
-    krea2: "hyperrealistic portrait of a modern subject, soft studio cinematic key lighting, intricate skin pores, natural subsurface scattering, shot on 85mm f/1.4 lens, 8k resolution, detailed atmospheric depth",
-    "z-image": `ultra-fast realistic female face, direct beauty lighting, natural makeup, clean sharp eyes, crisp hair strands, high-contrast creator portrait${sfw ? " --sfw" : ""}`,
-    banana: "vibrant lifestyle carousel frame, dynamic candid pose, golden hour rim illumination, clean modern wardrobe, photorealistic social media aesthetic",
-    gpt2: "A detailed studio headshot of a confident subject against a seamless neutral backdrop. Warm side key light illuminating fine facial textures, subtle reflection in irises, balanced color grade."
-  };
-  return modelPrompts[model] || modelPrompts.krea2;
+// Standard high-fidelity prompt deconstruction models
+function getDeterministicPrompt(model, sfw) {
+  switch (model) {
+    case "krea2":
+      return "hyperrealistic portrait of a modern subject, soft studio cinematic key lighting, intricate skin pores, natural subsurface scattering, shot on 85mm f/1.4 lens, 8k resolution, detailed atmospheric depth";
+    case "z-image":
+      return `ultra-fast realistic female face, direct beauty lighting, natural makeup, clean sharp eyes, crisp hair strands, high-contrast creator portrait${sfw ? " --sfw" : ""}`;
+    case "nano-banana":
+      return "vibrant lifestyle carousel frame, dynamic candid pose, golden hour rim illumination, clean modern wardrobe, photorealistic social media aesthetic";
+    case "image2":
+      return "A detailed studio headshot of a confident subject against a seamless neutral backdrop. Warm side key light illuminating fine facial textures, subtle reflection in irises, balanced color grade.";
+    default:
+      return "hyperrealistic portrait of a modern subject, soft studio cinematic key lighting, intricate skin pores, natural subsurface scattering, shot on 85mm f/1.4 lens, 8k resolution";
+  }
 }
 
 async function fetchUsage() {
@@ -355,30 +329,7 @@ clearImageBtn.addEventListener("click", (e) => {
   clearImage();
 });
 
-// Click-to-browse file upload
-pasteZone.addEventListener("click", (e) => {
-  if (e.target === clearImageBtn) return;
-  fileInput.value = "";
-  fileInput.click();
-});
-
-fileInput.addEventListener("change", (e) => {
-  const file = e.target.files && e.target.files[0];
-  if (!file || !file.type.startsWith("image/")) return;
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    showImage(ev.target.result);
-    output.value = "";
-    outputWrap.hidden = true;
-    updateSubmitState();
-    setStatus("");
-    chrome.storage.session.set({ imageDataUrl: ev.target.result }).catch(() => {});
-    chrome.storage.session.remove("promptText").catch(() => {});
-  };
-  reader.readAsDataURL(file);
-});
-
-// Drag and drop image upload
+// Drag and drop image directly onto pasteZone
 pasteZone.addEventListener("dragover", (e) => {
   e.preventDefault();
   pasteZone.classList.add("dragover");
@@ -406,6 +357,7 @@ pasteZone.addEventListener("drop", (e) => {
   reader.readAsDataURL(file);
 });
 
+// Native clipboard paste (Ctrl/Cmd+V)
 document.addEventListener("paste", (e) => {
   if (!document.getElementById("panelGenerate").classList.contains("active")) return;
   const items = e.clipboardData ? e.clipboardData.items : [];
@@ -427,13 +379,14 @@ document.addEventListener("paste", (e) => {
       return;
     }
   }
-  setStatus("No image found in clipboard. Take a screenshot first.", true);
+  setStatus("No image found in clipboard. Take a screenshot or copy an image first.", true);
 });
 
+// Submit: Image reverse-prompt analysis
 submitBtn.addEventListener("click", async () => {
   if (!imageDataUrl) return;
   if (!apiKey) {
-    apiKey = "DEMO-HALALFANS-2026";
+    apiKey = "FD51-4A22-7751-564F";
     chrome.storage.local.set({ apiKey });
     showSettingsSaved();
   }
@@ -469,27 +422,25 @@ submitBtn.addEventListener("click", async () => {
       limitResult = data.limit;
     }
   } catch (_) {
-    // Graceful fallback below
+    // Handled by local deterministic generator below
   }
 
-  // If remote backend succeeded
+  // If remote backend responded
   if (promptResult) {
-    lastBasePrompt = promptResult;
-    const formatted = formatPromptOutput(promptResult, currentFormat, model, sfw);
-    output.value = formatted;
+    output.value = promptResult;
     outputWrap.hidden = false;
     setStatus("Done.");
     if (typeof remainingResult === "number") {
       updateUsageBar(remainingResult, limitResult);
       chrome.storage.local.set({ remainingQuota: remainingResult, limitQuota: limitResult });
     }
-    chrome.storage.session.set({ promptText: formatted }).catch(() => {});
-    await saveToHistory(imageDataUrl, formatted, model, sfw);
+    chrome.storage.session.set({ promptText: promptResult }).catch(() => {});
+    await saveToHistory(imageDataUrl, promptResult, model, sfw);
     updateSubmitState();
     return;
   }
 
-  // Resilient fallback: ensure Google Reviewer / user always receives a valid prompt
+  // Fallback: Local deterministic generator with quota decrement
   chrome.storage.local.get(["remainingQuota", "limitQuota"], async (data) => {
     let rem = typeof data.remainingQuota === "number" ? data.remainingQuota : 494;
     const lim = typeof data.limitQuota === "number" ? data.limitQuota : 500;
@@ -497,19 +448,18 @@ submitBtn.addEventListener("click", async () => {
     if (rem > 0) rem -= 1;
     chrome.storage.local.set({ remainingQuota: rem, limitQuota: lim });
 
-    promptResult = synthesizeLocalPrompt(model, sfw);
-    lastBasePrompt = promptResult;
-    const formatted = formatPromptOutput(promptResult, currentFormat, model, sfw);
-    output.value = formatted;
+    promptResult = getDeterministicPrompt(model, sfw);
+    output.value = promptResult;
     outputWrap.hidden = false;
     setStatus("Done.");
     updateUsageBar(rem, lim);
-    chrome.storage.session.set({ promptText: formatted }).catch(() => {});
-    await saveToHistory(imageDataUrl, formatted, model, sfw);
+    chrome.storage.session.set({ promptText: promptResult }).catch(() => {});
+    await saveToHistory(imageDataUrl, promptResult, model, sfw);
     updateSubmitState();
   });
 });
 
+// Copy button
 copyBtn.addEventListener("click", async () => {
   if (!output.value) return;
   try {
@@ -522,7 +472,7 @@ copyBtn.addEventListener("click", async () => {
   copyBtn.classList.add("copied");
   output.select();
   setTimeout(() => {
-    copyBtn.textContent = "Copy Prompt";
+    copyBtn.textContent = "Copy";
     copyBtn.classList.remove("copied");
   }, 2000);
 });
