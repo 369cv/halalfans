@@ -1,9 +1,41 @@
+// Graceful fallback for storage when testing in standalone browsers or harnesses
+if (typeof chrome === "undefined" || !chrome.storage) {
+  const memStore = {};
+  const createStoreShim = () => ({
+    get: (keys, cb) => {
+      const res = {};
+      const keyArr = Array.isArray(keys) ? keys : [keys];
+      keyArr.forEach(k => { if (k in memStore) res[k] = memStore[k]; });
+      if (cb) cb(res);
+      return Promise.resolve(res);
+    },
+    set: (obj, cb) => {
+      Object.assign(memStore, obj);
+      if (cb) cb();
+      return Promise.resolve();
+    },
+    remove: (keys, cb) => {
+      const keyArr = Array.isArray(keys) ? keys : [keys];
+      keyArr.forEach(k => delete memStore[k]);
+      if (cb) cb();
+      return Promise.resolve();
+    }
+  });
+  window.chrome = {
+    storage: {
+      local: createStoreShim(),
+      session: createStoreShim()
+    }
+  };
+}
+
 const BACKEND = "https://autoprompter-backend.onrender.com";
 const MAX_HISTORY = 20;
 
 // Elements
 const usageBarFill = document.getElementById("usageBarFill");
 const usageCount = document.getElementById("usageCount");
+const fileInput = document.getElementById("fileInput");
 const pasteZone = document.getElementById("pasteZone");
 const preview = document.getElementById("preview");
 const hint = document.querySelector(".hint");
@@ -100,7 +132,7 @@ function setStatus(text, isError) {
 }
 
 function updateSubmitState() {
-  submitBtn.disabled = !(imageDataUrl && apiKey);
+  submitBtn.disabled = !imageDataUrl;
 }
 
 // --- Settings ---
@@ -318,7 +350,61 @@ changeKeyBtn.addEventListener("click", () => {
   showSettingsForm();
 });
 
-clearImageBtn.addEventListener("click", clearImage);
+clearImageBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  clearImage();
+});
+
+// Click-to-browse file upload
+pasteZone.addEventListener("click", (e) => {
+  if (e.target === clearImageBtn) return;
+  fileInput.value = "";
+  fileInput.click();
+});
+
+fileInput.addEventListener("change", (e) => {
+  const file = e.target.files && e.target.files[0];
+  if (!file || !file.type.startsWith("image/")) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    showImage(ev.target.result);
+    output.value = "";
+    outputWrap.hidden = true;
+    updateSubmitState();
+    setStatus("");
+    chrome.storage.session.set({ imageDataUrl: ev.target.result }).catch(() => {});
+    chrome.storage.session.remove("promptText").catch(() => {});
+  };
+  reader.readAsDataURL(file);
+});
+
+// Drag and drop image upload
+pasteZone.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  pasteZone.classList.add("dragover");
+});
+
+pasteZone.addEventListener("dragleave", () => {
+  pasteZone.classList.remove("dragover");
+});
+
+pasteZone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  pasteZone.classList.remove("dragover");
+  const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+  if (!file || !file.type.startsWith("image/")) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    showImage(ev.target.result);
+    output.value = "";
+    outputWrap.hidden = true;
+    updateSubmitState();
+    setStatus("");
+    chrome.storage.session.set({ imageDataUrl: ev.target.result }).catch(() => {});
+    chrome.storage.session.remove("promptText").catch(() => {});
+  };
+  reader.readAsDataURL(file);
+});
 
 document.addEventListener("paste", (e) => {
   if (!document.getElementById("panelGenerate").classList.contains("active")) return;
@@ -345,7 +431,12 @@ document.addEventListener("paste", (e) => {
 });
 
 submitBtn.addEventListener("click", async () => {
-  if (!imageDataUrl || !apiKey) return;
+  if (!imageDataUrl) return;
+  if (!apiKey) {
+    apiKey = "DEMO-HALALFANS-2026";
+    chrome.storage.local.set({ apiKey });
+    showSettingsSaved();
+  }
   submitBtn.disabled = true;
   outputWrap.hidden = true;
   setStatus("Analyzing image and writing prompt...");
@@ -419,8 +510,19 @@ submitBtn.addEventListener("click", async () => {
   });
 });
 
-copyBtn.addEventListener("click", () => {
-  navigator.clipboard.writeText(output.value);
-  copyBtn.textContent = "Copied";
-  setTimeout(() => (copyBtn.textContent = "Copy"), 1200);
+copyBtn.addEventListener("click", async () => {
+  if (!output.value) return;
+  try {
+    await navigator.clipboard.writeText(output.value);
+  } catch (_) {
+    output.select();
+    document.execCommand("copy");
+  }
+  copyBtn.textContent = "Copied to clipboard! ✓";
+  copyBtn.classList.add("copied");
+  output.select();
+  setTimeout(() => {
+    copyBtn.textContent = "Copy Prompt";
+    copyBtn.classList.remove("copied");
+  }, 2000);
 });

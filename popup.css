@@ -193,10 +193,21 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: text;
+  cursor: pointer;
   padding: 8px;
   outline: none;
-  transition: border-color 0.15s;
+  transition: all 0.15s ease;
+}
+
+.paste-zone:hover {
+  border-color: #3f4756;
+  background: #191c22;
+}
+
+.paste-zone.dragover {
+  border-color: var(--accent);
+  background: rgba(108, 140, 255, 0.12);
+  transform: scale(0.98);
 }
 
 .paste-zone:focus { border-color: var(--accent); }
@@ -481,3 +492,29 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .account-btn:hover { opacity: 0.88; }
 .btn-accent { background: var(--accent); color: #fff; }
+
+/* --- Copy button feedback --- */
+#copy.copied {
+  background: var(--green) !important;
+  color: #0b2e1b !important;
+  font-weight: 700;
+}
+
+/* --- Footer badge --- */
+.footer-badge {
+  margin-top: auto;
+  padding-top: 10px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.footer-badge a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-badge a:hover {
+  text-decoration: underline;
+}

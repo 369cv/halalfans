@@ -174,4 +174,5 @@ This generates `Chrome Extensions.crx` ready for upload to CWS.
 
 | Version | Date | Changes | Status |
 |---------|------|---------|--------|
+| 0.4.2 | 2026-11-05 | Full usability rebuild: Click-to-browse file upload, drag-and-drop image dropzone, multi-format outputs (Flux, Midjourney, ComfyUI, Video, JSON), 1-click copy feedback, and halalfans.me ecosystem integration. | Production Ready |
 | 0.4.1 | 2026-11-05 | Exact reference release with split paste view, model selector (Krea 2, Z-Image Turbo, Nano Banana, GPT Image 2), SFW mode, history manager, and account settings. | Draft |

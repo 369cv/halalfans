@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "img2prompt",
-  "version": "0.4.1",
-  "description": "Paste a screenshot, pick an image model, get a generation prompt.",
+  "name": "img2prompt — halalfans AI Suite",
+  "version": "0.4.2",
+  "description": "Paste or upload an image to reverse-engineer prompts for Flux, Midjourney, ComfyUI, and Video. Powered by halalfans.me.",
   "action": {
     "default_popup": "popup.html",
-    "default_title": "img2prompt",
+    "default_title": "img2prompt by halalfans.me",
     "default_icon": {
       "16": "icons/16px.png",
       "48": "icons/48px.png",
