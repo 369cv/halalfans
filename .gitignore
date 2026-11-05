@@ -1,0 +1,10 @@
+# Security & Private Keys
+privatekey.pem
+*.pem.key
+
+# Node & OS
+node_modules/
+.DS_Store
+video_frames/
+.env
+scratch/

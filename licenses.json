@@ -1,0 +1,47 @@
+{
+  "IMG2P-PRO-2026-REVIEWER": {
+    "key": "IMG2P-PRO-2026-REVIEWER",
+    "email": "reviewer@bahasavage.com",
+    "plan": "google-store-reviewer",
+    "limit": 99999,
+    "used": 0,
+    "createdAt": "2026-11-05T08:30:00.000Z",
+    "active": true
+  },
+  "FD51-4A22-7751-564F": {
+    "key": "FD51-4A22-7751-564F",
+    "email": "reviewer@google.com",
+    "plan": "reviewer",
+    "limit": 500,
+    "used": 6,
+    "createdAt": "2026-11-05T08:20:34.885Z",
+    "active": true
+  },
+  "IMG-7788-BAHA-2026": {
+    "key": "IMG-7788-BAHA-2026",
+    "email": "baha@bahasavage.com",
+    "plan": "unlimited",
+    "limit": 10000,
+    "used": 0,
+    "createdAt": "2026-11-05T08:20:34.888Z",
+    "active": true
+  },
+  "3ED2-3F8F-7CA6-8F33": {
+    "key": "3ED2-3F8F-7CA6-8F33",
+    "email": "baha@bahasavage.com",
+    "plan": "pro",
+    "limit": 250,
+    "used": 0,
+    "createdAt": "2026-11-05T08:20:34.889Z",
+    "active": true
+  },
+  "CE5C-AB4C-B746-69A1": {
+    "key": "CE5C-AB4C-B746-69A1",
+    "email": "test@example.com",
+    "plan": "creator",
+    "limit": 250,
+    "used": 0,
+    "createdAt": "2026-11-05T08:20:54.114Z",
+    "active": true
+  }
+}

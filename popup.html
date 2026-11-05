@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>img2prompt</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="header">
+    <div class="header-top">
+      <h1>img2prompt</h1>
+      <div class="usage-bar-wrap">
+        <div class="usage-bar">
+          <div class="usage-bar-fill" id="usageBarFill"></div>
+        </div>
+        <span class="usage-count" id="usageCount">-/-</span>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" id="tabGenerate">Generate</button>
+      <button class="tab" id="tabHistory">History</button>
+      <button class="tab" id="tabAccount">Account</button>
+    </div>
+  </div>
+
+  <!-- Generate tab -->
+  <div id="panelGenerate" class="active">
+
+    <!-- Split row: paste zone left, controls right -->
+    <div class="split-row">
+      <div class="split-left">
+        <div id="pasteZone" class="paste-zone" tabindex="0">
+          <span class="hint">Paste image<br/>(Ctrl/Cmd+V)</span>
+          <img id="preview" alt="" />
+          <button id="clearImage" class="clear-btn" hidden>✕</button>
+        </div>
+      </div>
+
+      <div class="split-right">
+        <label class="field-label">Model</label>
+        <select id="model">
+          <option value="krea2">Krea 2</option>
+          <option value="z-image">Z-Image Turbo</option>
+          <option value="nano-banana">Nano Banana</option>
+          <option value="image2">GPT Image 2</option>
+        </select>
+
+        <div id="sfwRow" class="sfw-row">
+          <span class="sfw-label">SFW mode</span>
+          <label class="toggle">
+            <input type="checkbox" id="sfwToggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <button id="submit" disabled>Submit</button>
+      </div>
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <div id="outputWrap" class="output-wrap" hidden>
+      <textarea id="output"></textarea>
+      <button id="copy">Copy</button>
+    </div>
+  </div>
+
+  <!-- History tab -->
+  <div id="panelHistory">
+    <div class="history-header">
+      <span id="historyCount" class="history-meta"></span>
+      <button class="btn-ghost btn-sm" id="clearHistory">Clear all</button>
+    </div>
+    <div id="historyList" class="history-list"></div>
+  </div>
+
+  <!-- Account tab -->
+  <div id="panelAccount">
+    <div class="account-section">
+      <label class="field-label">License key</label>
+      <div id="accountSettingsForm" class="settings-row">
+        <input id="apiKeyInput" type="text" placeholder="XXXX-XXXX-XXXX-XXXX" />
+        <button id="saveKey">Save</button>
+      </div>
+      <div id="accountSettingsSaved" class="key-saved" hidden>
+        <span id="keyDisplay" class="key-mono"></span>
+        <button id="changeKey" class="btn-ghost btn-sm">Change</button>
+      </div>
+    </div>
+
+    <div class="account-divider"></div>
+
+    <div class="account-section">
+      <label class="field-label">Subscription</label>
+      <a href="https://img2prompt.app" target="_blank" class="account-btn btn-accent" id="manageLicenseLink">
+        Get License Key · Instant Access
+      </a>
+    </div>
+
+    <div class="account-section">
+      <label class="field-label">About</label>
+      <a href="https://img2prompt.app" target="_blank" class="account-btn btn-ghost">
+        img2prompt Official Website →
+      </a>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

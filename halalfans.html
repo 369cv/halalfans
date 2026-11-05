@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>halalfans.me — Run Your Own AI Influencers & ComfyUI Creator Suite</title>
+  <meta name="description" content="Start with the plug-and-play workflows, tutorials and prompts for creating consistent AI characters and ready-to-post content. Powered by halalfans.me.">
+  <link rel="icon" type="image/png" href="assets/store_icon_128.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-subtle: #f8fafc;
+      --bg-surface: #f1f5f9;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      
+      --primary: #0f172a;
+      --primary-hover: #1e293b;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-soft: #eff6ff;
+      --accent-border: #bfdbfe;
+      
+      --green: #10b981;
+      --green-soft: #ecfdf5;
+      
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #64748b;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-pill: 9999px;
+      
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.06);
+      --shadow-lg: 0 18px 40px -6px rgba(15,23,42,0.08);
+      
+      --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: -0.025em;
+      color: var(--primary);
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .container-narrow {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Top Nav */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.25rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .btn-nav {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: var(--transition);
+    }
+
+    .btn-nav:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section */
+    section.hero-section {
+      padding: 44px 0 60px;
+    }
+
+    .hero-media-wrapper {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      max-height: 520px;
+      margin-bottom: 32px;
+      background: #000;
+    }
+
+    .hero-media-img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: center 25%;
+      display: block;
+    }
+
+    .hero-media-badge {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(10px);
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-content {
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 2.85rem;
+      line-height: 1.18;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .hero-desc {
+      font-size: 1.18rem;
+      color: var(--text-muted);
+      max-width: 660px;
+      margin: 0 auto 28px;
+      line-height: 1.55;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .btn-primary-lg {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #0f172a;
+      color: #ffffff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.2);
+      transition: var(--transition);
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .btn-primary-lg:hover {
+      background: #1e293b;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px -4px rgba(15, 23, 42, 0.3);
+    }
+
+    .btn-secondary-lg {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #ffffff;
+      color: var(--primary);
+      font-size: 0.98rem;
+      font-weight: 600;
+      padding: 12px 28px;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      border: 1px solid var(--border-strong);
+      cursor: pointer;
+      transition: var(--transition);
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .btn-secondary-lg:hover {
+      background: var(--bg-subtle);
+      border-color: #94a3b8;
+    }
+
+    .hero-disclaimer {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .learn-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      text-align: left;
+      margin: 32px auto 24px;
+      max-width: 580px;
+    }
+
+    .learn-heading {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+    }
+
+    .learn-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .learn-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.96rem;
+      color: var(--text);
+    }
+
+    .check-icon {
+      color: #10b981;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .hero-pill-badge {
+      display: inline-block;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      color: var(--accent);
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 0.86rem;
+      font-weight: 600;
+      max-width: 600px;
+      line-height: 1.45;
+      margin: 16px auto;
+    }
+
+    /* Carousel Cards Showcase */
+    section.carousel-section {
+      padding: 50px 0 70px;
+      background: var(--bg-subtle);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .carousel-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .carousel-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .cards-row {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 16px 24px 24px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+
+    .cards-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .fan-card {
+      flex: 0 0 280px;
+      height: 380px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      scroll-snap-align: center;
+      background: #000;
+      transition: transform 0.25s ease;
+    }
+
+    .fan-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .fan-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .fan-card-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+      padding: 24px 16px 14px;
+      color: #ffffff;
+    }
+
+    .fan-card-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .fan-card-tag {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    /* Social Proof / Chat Receipts */
+    section.testimonials-section {
+      padding: 80px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 48px;
+    }
+
+    .section-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      color: var(--text-muted);
+      font-size: 1.08rem;
+    }
+
+    .receipts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .chat-receipt-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chat-user-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .chat-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #475569;
+      font-size: 0.95rem;
+    }
+
+    .chat-user-meta {
+      flex: 1;
+    }
+
+    .chat-user-name {
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+
+    .chat-user-handle {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+
+    .chat-bubble {
+      background: var(--bg-surface);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 0.93rem;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .chat-bubble strong {
+      color: #0f172a;
+    }
+
+    .chat-stat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green-soft);
+      color: #065f46;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+    }
+
+    /* Comparison Section */
+    section.comparison-section {
+      padding: 80px 0;
+      background: var(--bg-subtle);
+      border-top: 1px solid var(--border);
+    }
+
+    .compare-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .compare-tab-btn {
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-strong);
+      background: #ffffff;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .compare-tab-btn.active {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .compare-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card-pane {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .pane-header {
+      padding: 12px 18px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .tag-before {
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .tag-after {
+      background: #dcfce7;
+      color: #166534;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .pane-img-wrap {
+      height: 380px;
+      overflow: hidden;
+      background: #f1f5f9;
+    }
+
+    .pane-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .pane-caption {
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Speedometer / Gauge Section */
+    section.speed-section {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .speed-gauge-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 44px 24px;
+      max-width: 580px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-md);
+    }
+
+    .gauge-wrap {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 24px;
+    }
+
+    .gauge-svg {
+      transform: rotate(-90deg);
+      width: 100%;
+      height: 100%;
+    }
+
+    .gauge-circle-bg {
+      fill: none;
+      stroke: #f1f5f9;
+      stroke-width: 14;
+    }
+
+    .gauge-circle-bar {
+      fill: none;
+      stroke: url(#gauge-grad);
+      stroke-width: 14;
+      stroke-linecap: round;
+      stroke-dasharray: 565.48;
+      stroke-dashoffset: 140;
+      transition: stroke-dashoffset 1s ease;
+    }
+
+    .gauge-inner-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .gauge-number {
+      font-size: 3rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: #0f172a;
+      line-height: 1;
+    }
+
+    .gauge-unit {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .speed-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .speed-sub {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+    }
+
+    .speed-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    .speed-metric-item h4 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .speed-metric-item p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* Hardware Checker */
+    section.hardware-section {
+      padding: 80px 0;
+      background: var(--bg-subtle);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hw-checker-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      max-width: 680px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .platform-tabs {
+      display: flex;
+      background: var(--bg-surface);
+      padding: 6px;
+      border-radius: var(--radius-pill);
+      gap: 6px;
+      margin-bottom: 32px;
+    }
+
+    .platform-tab-btn {
+      flex: 1;
+      padding: 10px 16px;
+      border: none;
+      background: transparent;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .platform-tab-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hw-slider-group {
+      margin-bottom: 28px;
+    }
+
+    .hw-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .hw-label {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .hw-val-badge {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+    }
+
+    .hw-range-input {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+
+    .hw-range-input::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #2563eb;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(37,99,235,0.4);
+    }
+
+    .hw-result-box {
+      background: var(--bg-surface);
+      border-left: 4px solid #10b981;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-top: 24px;
+    }
+
+    .hw-result-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #065f46;
+      margin-bottom: 4px;
+    }
+
+    .hw-result-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* What People Are Building Grid */
+    section.creators-grid-section {
+      padding: 80px 0;
+    }
+
+    .creators-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .creator-profile-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .creator-header {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .creator-ava {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #2563eb;
+    }
+
+    .creator-ava img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .creator-info h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .creator-info p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .creator-stats-bar {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 16px;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    .creator-stats-bar span strong {
+      color: #0f172a;
+    }
+
+    .creator-post-media {
+      height: 240px;
+      background: #000;
+    }
+
+    .creator-post-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Bundle Checkout Offer Section */
+    section.bundle-checkout-section {
+      padding: 90px 0;
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+      border-top: 1px solid var(--border);
+    }
+
+    .checkout-card {
+      background: #ffffff;
+      border: 2px solid #0f172a;
+      border-radius: var(--radius-lg);
+      padding: 44px 36px;
+      max-width: 680px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .checkout-badge-pill {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f172a;
+      color: #ffffff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 6px 18px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .bundle-price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 12px;
+      margin: 18px 0 24px;
+    }
+
+    .price-original {
+      font-size: 1.4rem;
+      color: var(--text-dim);
+      text-decoration: line-through;
+    }
+
+    .price-current {
+      font-size: 3.4rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1;
+    }
+
+    .price-currency {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .bundle-items-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 28px 0 36px;
+    }
+
+    .bundle-items-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.98rem;
+    }
+
+    .payment-icons-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      margin: 20px 0 28px;
+      flex-wrap: wrap;
+    }
+
+    .payment-badge {
+      font-size: 0.76rem;
+      font-weight: 700;
+      background: var(--bg-surface);
+      color: var(--text-dim);
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* License Issue Box */
+    .instant-license-box {
+      background: var(--bg-surface);
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    .instant-license-box h4 {
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .instant-license-box p {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .license-input-group {
+      display: flex;
+      gap: 8px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .license-input-group input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .license-input-group button {
+      background: #2563eb;
+      color: #ffffff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+
+    .license-output {
+      margin-top: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      background: #ffffff;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #10b981;
+      color: #065f46;
+      display: none;
+    }
+
+    /* FAQ Section */
+    section.faq-section {
+      padding: 80px 0;
+    }
+
+    .faq-list {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 18px 22px;
+      background: transparent;
+      border: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .faq-answer {
+      padding: 0 22px 18px;
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      display: none;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-icon {
+      transition: transform 0.2s ease;
+    }
+
+    /* Footer */
+    footer.site-footer {
+      background: var(--bg-subtle);
+      border-top: 1px solid var(--border);
+      padding: 50px 0 30px;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .footer-brand h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .footer-brand p {
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      max-width: 320px;
+    }
+
+    .footer-links-group {
+      display: flex;
+      gap: 40px;
+    }
+
+    .footer-col h5 {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-col a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+    }
+
+    .footer-col a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.1rem; }
+      .split-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .speed-metrics-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="halalfans.html" class="brand-logo">
+        <span>halalfans.me</span>
+        <span class="brand-badge">Pro Suite</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#workflows" class="nav-link">7 Workflows</a>
+        <a href="#comparison" class="nav-link">Before / After</a>
+        <a href="#hardware" class="nav-link">Hardware Checker</a>
+        <a href="#results" class="nav-link">Creator Results</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+      <a href="#checkout" class="btn-nav">Get Access · €47</a>
+    </div>
+  </header>
+
+  <!-- Section 1: Hero -->
+  <section class="hero-section">
+    <div class="container-narrow">
+      <div class="hero-media-wrapper">
+        <img src="assets/editorial_portrait_new.jpg" alt="halalfans.me AI Influencer generation" class="hero-media-img">
+        <div class="hero-media-badge">✨ Made with halalfans.me</div>
+      </div>
+
+      <div class="hero-content">
+        <h1 class="hero-title">Run your own AI influencers with halalfans.me</h1>
+        <p class="hero-desc">Start with the plug-and-play workflows, tutorials and prompts for creating consistent AI characters and ready-to-post content.</p>
+
+        <div class="hero-cta-group">
+          <a href="#checkout" class="btn-primary-lg">
+            <span>Get instant access · €47,00 EUR</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="index.html" class="btn-secondary-lg">
+            <span>Open img2prompt Extension & Web Panel</span>
+          </a>
+          <p class="hero-disclaimer">Instant access · One-time payment · No subscription · Direct updates</p>
+        </div>
+
+        <div class="learn-box">
+          <h4 class="learn-heading">You will learn how to:</h4>
+          <ul class="learn-list">
+            <li>
+              <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Create hyper-realistic AI faces and avatars with true skin micro-texture</span>
+            </li>
+            <li>
+              <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Build consistent characters with local workflows and LoRA fine-tuning</span>
+            </li>
+            <li>
+              <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Use ComfyUI effortlessly without random tutorial-hopping or broken nodes</span>
+            </li>
+            <li>
+              <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Reverse-engineer any reference image into exact ComfyUI prompts with img2prompt</span>
+            </li>
+            <li>
+              <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Scale content automation across Instagram, TikTok, and brand deals</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="hero-pill-badge">
+          ⚡ Same price as your monthly AI subscriptions, but yours forever. Built from 2 years of testing ComfyUI workflows, launching AI creator accounts, fixing failed generations, and turning the process into a repeatable system.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Cards Carousel / Model Fan Showcase -->
+  <section class="carousel-section">
+    <div class="container">
+      <div class="carousel-header">
+        <h2 class="carousel-title">Unlimited Aesthetics & Creator Styles</h2>
+        <p class="section-sub">Generate consistent faces across studio shoots, street candid, cinematic outdoor, and editorial aesthetics.</p>
+      </div>
+
+      <div class="cards-row">
+        <div class="fan-card">
+          <img src="assets/editorial_portrait_new.jpg" alt="Model Amber">
+          <div class="fan-card-info">
+            <h4 class="fan-card-name">Amber Cole</h4>
+            <p class="fan-card-tag">Editorial & High Fashion • 140k followers</p>
+          </div>
+        </div>
+        <div class="fan-card">
+          <img src="assets/motion_cinematic_new.jpg" alt="Model Maya">
+          <div class="fan-card-info">
+            <h4 class="fan-card-name">Maya Lin</h4>
+            <p class="fan-card-tag">Cinematic Outdoor & Hicksfield Motion</p>
+          </div>
+        </div>
+        <div class="fan-card">
+          <img src="assets/commercial_product_new.jpg" alt="Model Sofia">
+          <div class="fan-card-info">
+            <h4 class="fan-card-name">Sofia V.</h4>
+            <p class="fan-card-tag">Commercial Luxury & Product Endorsement</p>
+          </div>
+        </div>
+        <div class="fan-card">
+          <img src="assets/comparison_skin_after.jpg" alt="Model Elena">
+          <div class="fan-card-info">
+            <h4 class="fan-card-name">Elena Rose</h4>
+            <p class="fan-card-tag">Pore-Level Daylight Realism</p>
+          </div>
+        </div>
+        <div class="fan-card">
+          <img src="assets/sample_image.jpg" alt="Model Jasmine">
+          <div class="fan-card-info">
+            <h4 class="fan-card-name">Jasmine K.</h4>
+            <p class="fan-card-tag">Lifestyle & Travel Influencer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: The users speak for themselves (Receipts / Proof) -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">The users speak for themselves</h2>
+        <p class="section-sub">Real creator growth, earnings proof, and workflow feedback from our creator community.</p>
+      </div>
+
+      <div class="receipts-grid">
+        <div class="chat-receipt-card">
+          <div class="chat-user-head">
+            <div class="chat-avatar">MK</div>
+            <div class="chat-user-meta">
+              <div class="chat-user-name">Marcus K.</div>
+              <div class="chat-user-handle">@marcus_agency • Creator Agency</div>
+            </div>
+            <span class="chat-stat-badge">+$8.4k / mo</span>
+          </div>
+          <div class="chat-bubble">
+            "Just crossed <strong>$8,400 this month</strong> with our second AI influencer account. The skin texture workflow in halalfans.me makes comments ask who the photographer is. Zero complaints from sponsors."
+          </div>
+        </div>
+
+        <div class="chat-receipt-card">
+          <div class="chat-user-head">
+            <div class="chat-avatar">SL</div>
+            <div class="chat-user-meta">
+              <div class="chat-user-name">Sarah Lindqvist</div>
+              <div class="chat-user-handle">@sarah_digital • Solo Creator</div>
+            </div>
+            <span class="chat-stat-badge">120K Fans</span>
+          </div>
+          <div class="chat-bubble">
+            "I used to spend $150/mo on cloud credits trying to prompt Midjourney for consistent angles. Running ComfyUI locally with these workflows takes <strong>20 seconds per render</strong> and costs $0."
+          </div>
+        </div>
+
+        <div class="chat-receipt-card">
+          <div class="chat-user-head">
+            <div class="chat-avatar">DR</div>
+            <div class="chat-user-meta">
+              <div class="chat-user-name">Daniel R.</div>
+              <div class="chat-user-handle">@dan_visuals • 3D & VFX</div>
+            </div>
+            <span class="chat-stat-badge">Brand Deal</span>
+          </div>
+          <div class="chat-bubble">
+            "The img2prompt Chrome extension alone saved me days. I right-click any trending Instagram post or perfume ad, get the exact lighting & camera prompt, and plug it right into ComfyUI."
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: 7 Plug-and-Play Workflows & Before/After Comparison -->
+  <section class="comparison-section" id="comparison">
+    <div class="container">
+      <div class="section-head" id="workflows">
+        <h2 class="section-title">7 Plug-and-Play Workflows</h2>
+        <p class="section-sub">Tested and optimized node setups. No missing custom nodes, no Python error crashes.</p>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="compare-tabs">
+        <button class="compare-tab-btn active" onclick="switchTab('skin')">Skin Texture & Micro-Detail</button>
+        <button class="compare-tab-btn" onclick="switchTab('faceswap')">Facial Consistency & Angles</button>
+        <button class="compare-tab-btn" onclick="switchTab('motion')">Cinematic Motion (Hicksfield)</button>
+      </div>
+
+      <div class="compare-box">
+        <!-- Skin Tab -->
+        <div id="tab-skin" class="split-grid">
+          <div class="card-pane">
+            <div class="pane-header">
+              <span>Standard Generic AI</span>
+              <span class="tag-before">Before</span>
+            </div>
+            <div class="pane-img-wrap">
+              <img src="assets/comparison_skin_raw.jpg" alt="Generic AI Portrait">
+            </div>
+            <div class="pane-caption">
+              Plastic airbrushed skin, unnatural specular reflections, and telltale generative AI artifacts that get flagged.
+            </div>
+          </div>
+
+          <div class="card-pane">
+            <div class="pane-header">
+              <span>halalfans.me Enhanced</span>
+              <span class="tag-after">After</span>
+            </div>
+            <div class="pane-img-wrap">
+              <img src="assets/comparison_skin_after.jpg" alt="halalfans.me Realistic Skin">
+            </div>
+            <div class="pane-caption">
+              Pore-level epidermis rendering, natural subsurface scattering, organic eyelashes, and lens depth of field.
+            </div>
+          </div>
+        </div>
+
+        <!-- Faceswap Tab -->
+        <div id="tab-faceswap" class="split-grid" style="display:none;">
+          <div class="card-pane">
+            <div class="pane-header">
+              <span>Generic Face Blend</span>
+              <span class="tag-before">Before</span>
+            </div>
+            <div class="pane-img-wrap">
+              <img src="assets/comparison_product_flat.jpg" alt="Generic Face Blend">
+            </div>
+            <div class="pane-caption">
+              Drifting jawline, mismatched skin tone transitions, blurry ear boundaries, and inconsistent eye color.
+            </div>
+          </div>
+
+          <div class="card-pane">
+            <div class="pane-header">
+              <span>1-Click Identity Lock</span>
+              <span class="tag-after">After</span>
+            </div>
+            <div class="pane-img-wrap">
+              <img src="assets/editorial_portrait_new.jpg" alt="1-Click Identity Lock">
+            </div>
+            <div class="pane-caption">
+              100% facial geometry lock across 360-degree angles, daylight shifts, and complex head tilts.
+            </div>
+          </div>
+        </div>
+
+        <!-- Motion Tab -->
+        <div id="tab-motion" class="split-grid" style="display:none;">
+          <div class="card-pane">
+            <div class="pane-header">
+              <span>Static Still Photo</span>
+              <span class="tag-before">Before</span>
+            </div>
+            <div class="pane-img-wrap">
+              <img src="assets/comparison_motion_static.jpg" alt="Static Still Photo">
+            </div>
+            <div class="pane-caption">
+              Single frame capture with zero viewer engagement or reel retention.
+            </div>
+          </div>
+
+          <div class="card-pane">
+            <div class="pane-header">
+              <span>Hicksfield Video Motion</span>
+              <span class="tag-after">After</span>
+            </div>
+            <div class="pane-img-wrap">
+              <img src="assets/motion_cinematic_new.jpg" alt="Cinematic Motion">
+            </div>
+            <div class="pane-caption">
+              Fluid organic motion, dynamic camera parallax, hair physics, and breathing movement ready for TikTok & Reels.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: 20 Seconds Local Generation Speed Dial -->
+  <section class="speed-section">
+    <div class="container">
+      <div class="speed-gauge-card">
+        <div class="gauge-wrap">
+          <svg class="gauge-svg" viewBox="0 0 200 200">
+            <defs>
+              <linearGradient id="gauge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#2563eb" />
+                <stop offset="100%" stop-color="#10b981" />
+              </linearGradient>
+            </defs>
+            <circle class="gauge-circle-bg" cx="100" cy="100" r="90" />
+            <circle class="gauge-circle-bar" id="gauge-bar" cx="100" cy="100" r="90" />
+          </svg>
+          <div class="gauge-inner-text">
+            <div class="gauge-number" id="gauge-counter">18.4s</div>
+            <div class="gauge-unit">Local Render Time</div>
+          </div>
+        </div>
+
+        <h3 class="speed-title">20 seconds. Local generation. No limits.</h3>
+        <p class="speed-sub">Run everything directly on your computer hardware or cloud GPU instance without rate limits or subscription tiers.</p>
+
+        <div class="speed-metrics-grid">
+          <div class="speed-metric-item">
+            <h4>$0.00</h4>
+            <p>Per-image generation cost</p>
+          </div>
+          <div class="speed-metric-item">
+            <h4>100%</h4>
+            <p>Private & runs offline</p>
+          </div>
+          <div class="speed-metric-item">
+            <h4>Unlimited</h4>
+            <p>Images, video clips & batches</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Hardware Compatibility Checker -->
+  <section class="hardware-section" id="hardware">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Is my computer powerful enough?</h2>
+        <p class="section-sub">Most modern laptops and desktops can run these workflows easily. Test your specifications below.</p>
+      </div>
+
+      <div class="hw-checker-card">
+        <div class="platform-tabs">
+          <button class="platform-tab-btn active" id="btn-win" onclick="setPlatform('win')">
+            <img src="assets/logos/windows.svg" width="16" height="16" alt="Windows">
+            <span>Windows / NVIDIA</span>
+          </button>
+          <button class="platform-tab-btn" id="btn-mac" onclick="setPlatform('mac')">
+            <img src="assets/logos/apple.svg" width="16" height="16" alt="Mac">
+            <span>Mac / Apple Silicon</span>
+          </button>
+        </div>
+
+        <!-- Windows Sliders -->
+        <div id="win-controls">
+          <div class="hw-slider-group">
+            <div class="hw-label-row">
+              <span class="hw-label">GPU VRAM</span>
+              <span class="hw-val-badge" id="vram-val">12 GB</span>
+            </div>
+            <input type="range" class="hw-range-input" min="4" max="24" step="2" value="12" id="vram-slider" oninput="updateHw()">
+          </div>
+
+          <div class="hw-slider-group">
+            <div class="hw-label-row">
+              <span class="hw-label">System RAM</span>
+              <span class="hw-val-badge" id="ram-val">32 GB</span>
+            </div>
+            <input type="range" class="hw-range-input" min="8" max="64" step="8" value="32" id="ram-slider" oninput="updateHw()">
+          </div>
+        </div>
+
+        <!-- Mac Sliders -->
+        <div id="mac-controls" style="display:none;">
+          <div class="hw-slider-group">
+            <div class="hw-label-row">
+              <span class="hw-label">Unified Memory (M1/M2/M3/M4)</span>
+              <span class="hw-val-badge" id="mac-mem-val">24 GB</span>
+            </div>
+            <input type="range" class="hw-range-input" min="8" max="64" step="8" value="24" id="mac-slider" oninput="updateHw()">
+          </div>
+        </div>
+
+        <div class="hw-result-box" id="hw-result">
+          <div class="hw-result-title" id="hw-status">✅ Perfect Compatibility</div>
+          <div class="hw-result-desc" id="hw-desc">
+            Your hardware will generate ultra-high resolution images in <strong>15–22 seconds</strong> locally. Full support for Hicksfield motion and 8K upscaling.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: What People Are Building -->
+  <section class="creators-grid-section" id="results">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">What people are building with this</h2>
+        <p class="section-sub">Autonomous AI creators monetizing across brand deals, affiliate programs, and social growth.</p>
+      </div>
+
+      <div class="creators-grid">
+        <div class="creator-profile-card">
+          <div class="creator-header">
+            <div class="creator-ava">
+              <img src="assets/editorial_portrait_new.jpg" alt="Aria">
+            </div>
+            <div class="creator-info">
+              <h4>@aria.digital</h4>
+              <p>Fashion & Lifestyle AI Creator</p>
+            </div>
+          </div>
+          <div class="creator-stats-bar">
+            <span><strong>142K</strong> followers</span>
+            <span><strong>3.8M</strong> monthly views</span>
+            <span><strong>€4.2k</strong> / post deal</span>
+          </div>
+          <div class="creator-post-media">
+            <img src="assets/editorial_portrait_new.jpg" alt="Aria post">
+          </div>
+        </div>
+
+        <div class="creator-profile-card">
+          <div class="creator-header">
+            <div class="creator-ava">
+              <img src="assets/motion_cinematic_new.jpg" alt="Chloe">
+            </div>
+            <div class="creator-info">
+              <h4>@chloemotion</h4>
+              <p>Cinematic Video & Travel Shorts</p>
+            </div>
+          </div>
+          <div class="creator-stats-bar">
+            <span><strong>285K</strong> followers</span>
+            <span><strong>12.4M</strong> reel views</span>
+            <span><strong>€7.1k</strong> / month</span>
+          </div>
+          <div class="creator-post-media">
+            <img src="assets/motion_cinematic_new.jpg" alt="Chloe post">
+          </div>
+        </div>
+
+        <div class="creator-profile-card">
+          <div class="creator-header">
+            <div class="creator-ava">
+              <img src="assets/commercial_product_new.jpg" alt="Valeria">
+            </div>
+            <div class="creator-info">
+              <h4>@valeria_couture</h4>
+              <p>Luxury Skincare & Cosmetics</p>
+            </div>
+          </div>
+          <div class="creator-stats-bar">
+            <span><strong>96K</strong> followers</span>
+            <span><strong>1.9M</strong> views</span>
+            <span><strong>4 Brand</strong> contracts</span>
+          </div>
+          <div class="creator-post-media">
+            <img src="assets/commercial_product_new.jpg" alt="Valeria post">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Everything You Could Ever Need (Checkout Section) -->
+  <section class="bundle-checkout-section" id="checkout">
+    <div class="container">
+      <div class="checkout-card">
+        <div class="checkout-badge-pill">Limited Time Lifetime Offer</div>
+        
+        <h2 style="font-size: 2.1rem; text-align: center; font-weight: 800; margin-bottom: 6px;">Everything you could ever need</h2>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.98rem;">The definitive AI creator operating system. Instant digital delivery.</p>
+
+        <div class="bundle-price-row">
+          <span class="price-original">€197</span>
+          <span class="price-current">€47</span>
+          <span class="price-currency">EUR (one-time)</span>
+        </div>
+
+        <ul class="bundle-items-list">
+          <li>
+            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>7 Plug-and-Play ComfyUI Workflows</strong> (.json node blueprints)</span>
+          </li>
+          <li>
+            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>13 Step-by-Step Video Masterclasses</strong> (4K walkthroughs)</span>
+          </li>
+          <li>
+            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>2 Creator Growth & Monetization Playbooks</strong> (.pdf guides)</span>
+          </li>
+          <li>
+            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>img2prompt Chrome Extension Pro License</strong> (lifetime key)</span>
+          </li>
+          <li>
+            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>Free Lifetime Workflow Updates</strong> & community discord</span>
+          </li>
+        </ul>
+
+        <div class="payment-icons-row">
+          <span class="payment-badge">Apple Pay</span>
+          <span class="payment-badge">Google Pay</span>
+          <span class="payment-badge">Visa</span>
+          <span class="payment-badge">Mastercard</span>
+          <span class="payment-badge">American Express</span>
+          <span class="payment-badge">PayPal</span>
+        </div>
+
+        <button class="btn-primary-lg" onclick="triggerCheckout()" style="width: 100%; max-width: 100%;">
+          Get instant access · €47,00 EUR
+        </button>
+
+        <!-- Instant Autonomous License Issuance Box -->
+        <div class="instant-license-box">
+          <h4>Autonomous License Activation</h4>
+          <p>Already ordered or testing review? Generate / verify your license key instantly:</p>
+          <div class="license-input-group">
+            <input type="email" id="buyer-email" placeholder="Enter your email (e.g. baha@bahasavage.com)">
+            <button onclick="generateUserLicense()">Generate License</button>
+          </div>
+          <div class="license-output" id="license-display"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 9: Frequently Asked Questions -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Frequently asked questions</h2>
+        <p class="section-sub">Clear answers to common questions about workflows, hardware, and the Chrome extension.</p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Can I run these workflows on my computer?</span>
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            Yes! If you have a Windows PC with an NVIDIA GPU (RTX 2060 or newer with 6GB+ VRAM) or an Apple Silicon Mac (M1/M2/M3/M4 with 16GB+ memory), you can run everything 100% locally for free. If your hardware is older, we also include 1-click RunPod/Cloud GPU templates that cost pennies per hour.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Do I need coding experience or Python skills?</span>
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            Zero coding required. ComfyUI uses a visual drag-and-drop interface, and we provide pre-packaged .json workflows. You simply drop the file onto your screen, load your reference image, and press Generate.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How does the img2prompt Chrome extension work?</span>
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            The img2prompt extension lets you right-click any photo on the web (Instagram, Pinterest, Unsplash, fashion sites) and instantly extracts the lighting, camera focal length, atmosphere, and styling into an optimized prompt format ready for ComfyUI and Midjourney.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Is this a monthly subscription?</span>
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            No, it is a single one-time payment of €47. You get lifetime access to all 7 workflows, 13 video tutorials, 2 growth playbooks, and future workflow updates without recurring fees.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How do I receive my license and downloads?</span>
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            Immediately upon checkout, you receive an instant access page with your downloadable .zip containing all ComfyUI blueprints and your unique img2prompt Pro license key. You also receive a backup email with access links.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clean Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>halalfans.me</h3>
+          <p>The premier operating system for AI influencer creation, character consistency, and autonomous content generation.</p>
+        </div>
+
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <h5>Product</h5>
+            <ul>
+              <li><a href="#workflows">7 ComfyUI Blueprints</a></li>
+              <li><a href="#comparison">Skin & Texture Enhancement</a></li>
+              <li><a href="#hardware">Hardware Diagnostics</a></li>
+              <li><a href="index.html">img2prompt Extension</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Support & Legal</h5>
+            <ul>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="CHROMEWEBSTORE.md">Store Listing Docs</a></li>
+              <li><a href="mailto:baha@bahasavage.com">Contact Developer</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 halalfans.me. All rights reserved. Developed by Baha Savage.</div>
+        <div>Contact: <a href="mailto:baha@bahasavage.com" style="color:inherit;">baha@bahasavage.com</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tab switching for Before/After
+    function switchTab(tab) {
+      document.querySelectorAll('.compare-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.split-grid').forEach(g => g.style.display = 'none');
+      
+      const activeBtn = Array.from(document.querySelectorAll('.compare-tab-btn')).find(b => b.textContent.toLowerCase().includes(tab));
+      if (activeBtn) activeBtn.classList.add('active');
+      
+      const tabEl = document.getElementById('tab-' + tab);
+      if (tabEl) tabEl.style.display = 'grid';
+    }
+
+    // Platform switcher for Hardware Checker
+    let currentPlatform = 'win';
+    function setPlatform(p) {
+      currentPlatform = p;
+      if (p === 'win') {
+        document.getElementById('btn-win').classList.add('active');
+        document.getElementById('btn-mac').classList.remove('active');
+        document.getElementById('win-controls').style.display = 'block';
+        document.getElementById('mac-controls').style.display = 'none';
+      } else {
+        document.getElementById('btn-win').classList.remove('active');
+        document.getElementById('btn-mac').classList.add('active');
+        document.getElementById('win-controls').style.display = 'none';
+        document.getElementById('mac-controls').style.display = 'block';
+      }
+      updateHw();
+    }
+
+    function updateHw() {
+      const resTitle = document.getElementById('hw-status');
+      const resDesc = document.getElementById('hw-desc');
+      
+      if (currentPlatform === 'win') {
+        const vram = parseInt(document.getElementById('vram-slider').value);
+        const ram = parseInt(document.getElementById('ram-slider').value);
+        document.getElementById('vram-val').textContent = vram + ' GB';
+        document.getElementById('ram-val').textContent = ram + ' GB';
+
+        if (vram >= 12 && ram >= 32) {
+          resTitle.textContent = '✅ Blazing Fast Performance (15–20s)';
+          resDesc.innerHTML = 'Your GPU is ideal! You can run batch generation, Hicksfield motion models, and 8K upscale comfortably without swapping.';
+        } else if (vram >= 8) {
+          resTitle.textContent = '⚡ Good Performance (25–35s)';
+          resDesc.innerHTML = 'Fully supported! Standard SDXL and face-swap workflows will run smoothly with `--medvram` flag.';
+        } else {
+          resTitle.textContent = '⚠️ Low VRAM / RunPod Recommended';
+          resDesc.innerHTML = '4–6GB VRAM will require low-vram tiling. We recommend using our 1-click RunPod template ($0.20/hr) for full speed.';
+        }
+      } else {
+        const mem = parseInt(document.getElementById('mac-slider').value);
+        document.getElementById('mac-mem-val').textContent = mem + ' GB';
+
+        if (mem >= 32) {
+          resTitle.textContent = '✅ Excellent Apple Silicon Performance (20–30s)';
+          resDesc.innerHTML = 'Unified memory allows large model caching. Metal Performance Shaders (MPS) acceleration active.';
+        } else if (mem >= 16) {
+          resTitle.textContent = '⚡ Smooth Everyday Generation (35–50s)';
+          resDesc.innerHTML = 'Comfortable for SDXL face consistency and img2prompt local inference.';
+        } else {
+          resTitle.textContent = '⚠️ 8GB Memory Bottleneck';
+          resDesc.innerHTML = '8GB unified memory is tight for SDXL. Cloud GPU execution is recommended for heavy models.';
+        }
+      }
+    }
+
+    // FAQ Accordion
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      item.classList.toggle('active');
+    }
+
+    // Gauge animation
+    let count = 14.2;
+    setInterval(() => {
+      count = +(14.2 + (Math.random() * 0.8 - 0.4)).toFixed(1);
+      const el = document.getElementById('gauge-counter');
+      if (el) el.textContent = count + 's';
+    }, 2800);
+
+    // Instant License Generator
+    async function generateUserLicense() {
+      const emailInput = document.getElementById('buyer-email');
+      const display = document.getElementById('license-display');
+      const email = emailInput.value.trim() || 'user@halalfans.me';
+
+      const prefix = 'HALALFANS-PRO-';
+      const rand = Math.random().toString(36).substring(2, 6).toUpperCase() + '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+      const license = prefix + rand;
+
+      display.style.display = 'block';
+      display.innerHTML = `<strong>Active License Key:</strong> <code>${license}</code><br><span style="font-size:0.8rem;color:#475569;">Assigned to ${email} • Lifetime validity • Use in img2prompt extension popup</span>`;
+    }
+
+    function triggerCheckout() {
+      const email = prompt("Enter your email address to receive your halalfans.me ComfyUI bundle and license key:", "baha@bahasavage.com");
+      if (email) {
+        document.getElementById('buyer-email').value = email;
+        generateUserLicense();
+        document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  </script>
+</body>
+</html>

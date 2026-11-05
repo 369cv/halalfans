@@ -1,0 +1,12 @@
+{
+  "name": "img2prompt",
+  "version": "0.4.1",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "issue": "node issue_license.js"
+  },
+  "dependencies": {
+    "puppeteer-core": "^25.16.0"
+  }
+}
