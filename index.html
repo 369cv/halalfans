@@ -180,12 +180,87 @@
       transition: color 0.15s ease;
       display: flex;
       align-items: center;
-      gap: 4px;
-      padding: 6px 0;
+      gap: 5px;
+      padding: 8px 0;
     }
 
     .nav-link:hover {
       color: #0f172a;
+    }
+
+    .nav-link svg.chevron {
+      width: 10px;
+      height: 10px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      margin-left: 2px;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-block;
+    }
+
+    .nav-item:hover .nav-link svg.chevron {
+      transform: rotate(180deg);
+      stroke: #0f172a;
+    }
+
+    /* Minimalist Flyout Menus (HeyGen / Muzeboard Style) */
+    .nav-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      width: 340px;
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      border-radius: 14px;
+      box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(15, 23, 42, 0.04);
+      padding: 10px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .nav-item:hover .nav-dropdown,
+    .nav-item:focus-within .nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+
+    .dropdown-link {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 10px 12px;
+      border-radius: 9px;
+      text-decoration: none;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .dropdown-link:hover {
+      background: #f8fafc;
+      transform: translateX(2px);
+    }
+
+    .dropdown-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dropdown-desc {
+      font-size: 0.74rem;
+      color: #64748b;
+      line-height: 1.35;
     }
 
     /* Sub-nav indicator */
@@ -1354,19 +1429,55 @@
         <span>halalfans.me</span>
       </a>
 
-      <!-- Minimalist Workflow & Use Case Navigation -->
+      <!-- Minimalist Workflow & Use Case Navigation (HeyGen / Muzeboard / Muzecast Style, NO CTAs) -->
       <nav class="nav-menu">
         <div class="nav-item">
           <a href="#workflows" class="nav-link">
             <span>Workflows</span>
             <span class="nav-tag">7 Suite</span>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
           </a>
+          <div class="nav-dropdown">
+            <a href="#workflows" class="dropdown-link">
+              <span class="dropdown-title">🎭 Character Consistency Engine</span>
+              <span class="dropdown-desc">InstantID & IP-Adapter pipelines for facial lock across unlimited angles.</span>
+            </a>
+            <a href="#workflows" class="dropdown-link">
+              <span class="dropdown-title">🎬 Higgsfield Cinematic Motion</span>
+              <span class="dropdown-desc">24fps video generation, fluid hair physics, and camera parallax loops.</span>
+            </a>
+            <a href="#workflows" class="dropdown-link">
+              <span class="dropdown-title">💡 Studio Lighting & 8K Upscale</span>
+              <span class="dropdown-desc">Natural skin pores, studio softboxes, and film grain realism.</span>
+            </a>
+            <a href="#workflows" class="dropdown-link">
+              <span class="dropdown-title">🔍 img2prompt Reverse Engineering</span>
+              <span class="dropdown-desc">1-click camera, lens, and lighting extraction for Flux & Midjourney.</span>
+            </a>
+          </div>
         </div>
+
         <div class="nav-item">
           <a href="#comparison" class="nav-link">
             <span>Use Cases</span>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
           </a>
+          <div class="nav-dropdown">
+            <a href="#comparison" class="dropdown-link">
+              <span class="dropdown-title">👗 AI Fashion & Model Lookbooks</span>
+              <span class="dropdown-desc">Editorial magazine spreads and digital apparel drops with zero photo shoots.</span>
+            </a>
+            <a href="#comparison" class="dropdown-link">
+              <span class="dropdown-title">📱 TikTok & Short-Form Video</span>
+              <span class="dropdown-desc">Autonomous viral short-form video generation with persistent personas.</span>
+            </a>
+            <a href="#comparison" class="dropdown-link">
+              <span class="dropdown-title">🤝 Brand Partnerships & Ads</span>
+              <span class="dropdown-desc">Monetize digital creators with product placements and sponsor deals.</span>
+            </a>
+          </div>
         </div>
+
         <div class="nav-item">
           <a href="#playground" class="nav-link">
             <span>Live Tester</span>
