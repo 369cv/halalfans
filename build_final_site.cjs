@@ -84,7 +84,7 @@ const newNavbarWrap = `<div class="pnb-wrap">
           <span class="hf-dropdown-desc">InstantID & IP-Adapter pipelines for facial lock across unlimited angles.</span>
         </a>
         <a href="#shopify-section-template--27200522617169__pe_workflows_section_ryt8FU" class="hf-dropdown-link">
-          <span class="hf-dropdown-title">🎬 Higgsfield Cinematic Motion</span>
+          <span class="hf-dropdown-title">🎬 Cinematic Video & Motion Control</span>
           <span class="hf-dropdown-desc">24fps video generation, fluid hair physics, and camera parallax loops.</span>
         </a>
         <a href="#shopify-section-template--27200522617169__pe_workflows_section_ryt8FU" class="hf-dropdown-link">
