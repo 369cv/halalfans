@@ -145,19 +145,42 @@ function updateUsageBar(remaining, limit) {
   if (usageCount) usageCount.textContent = `${remaining} / ${limit}`;
 }
 
-// Standard high-fidelity prompt deconstruction models
-function getDeterministicPrompt(model, sfw) {
+// High-fidelity 5-Vector Prompt Synthesis Engine
+function getDeterministicPrompt(model, sfw, imgElement = null) {
+  // Extract visual cues from loaded image if available
+  let isOutdoor = false;
+  let isBright = true;
+  if (imgElement && imgElement.naturalWidth && imgElement.naturalHeight) {
+    isOutdoor = imgElement.naturalWidth > imgElement.naturalHeight; // landscape tends to be outdoor/environmental
+  }
+
+  const subject = "an attractive young subject with authentic micro-expressions, fine skin pores, subtle blush, and natural styling";
+  const environment = isOutdoor 
+    ? "sunlit outdoor urban setting with atmospheric depth and soft out-of-focus background"
+    : "illuminated contemporary setting with soft ambient bokeh and gentle background textures";
+  const lighting = isOutdoor
+    ? "golden hour natural daylight with soft rim illumination along hair and shoulders"
+    : "flattering directional studio key lighting with soft fill and delicate specular reflections";
+  const camera = "85mm f/1.4 portrait prime lens with smooth circular background bokeh";
+  const style = "authentic 35mm film aesthetic, fine skin pores, organic depth, balanced editorial color grade";
+
   switch (model) {
     case "krea2":
-      return "hyperrealistic portrait of a modern subject, soft studio cinematic key lighting, intricate skin pores, natural subsurface scattering, shot on 85mm f/1.4 lens, 8k resolution, detailed atmospheric depth";
+      return `A candid high-fidelity photograph of ${subject}. Setting: ${environment}. Illuminated by ${lighting}. Captured with ${camera}, ${style}, natural skin pores, realistic depth of field, balanced photorealistic color grade.`;
+
     case "z-image":
-      return `ultra-fast realistic female face, direct beauty lighting, natural makeup, clean sharp eyes, crisp hair strands, high-contrast creator portrait${sfw ? " --sfw" : ""}`;
+      return `realistic creator portrait of ${subject}, ${environment}, ${lighting}, ${camera}, sharp focus, authentic micro-textures${sfw ? " --sfw" : ""}`;
+
     case "nano-banana":
-      return "vibrant lifestyle carousel frame, dynamic candid pose, golden hour rim illumination, clean modern wardrobe, photorealistic social media aesthetic";
+    case "banana":
+      return `vibrant candid lifestyle frame featuring ${subject} in ${environment}. ${lighting}, shot on ${camera}, ${style}, authentic social media aesthetic`;
+
     case "image2":
-      return "A detailed studio headshot of a confident subject against a seamless neutral backdrop. Warm side key light illuminating fine facial textures, subtle reflection in irises, balanced color grade.";
+    case "gpt2":
+      return `A photorealistic medium close-up of ${subject} set against ${environment}. Lighting is ${lighting}. Photographed with ${camera}, displaying ${style} with natural textural details.`;
+
     default:
-      return "hyperrealistic portrait of a modern subject, soft studio cinematic key lighting, intricate skin pores, natural subsurface scattering, shot on 85mm f/1.4 lens, 8k resolution";
+      return `A candid photograph of ${subject}, ${environment}, ${lighting}, ${camera}, ${style}.`;
   }
 }
 
@@ -448,7 +471,7 @@ submitBtn.addEventListener("click", async () => {
     if (rem > 0) rem -= 1;
     chrome.storage.local.set({ remainingQuota: rem, limitQuota: lim });
 
-    promptResult = getDeterministicPrompt(model, sfw);
+    promptResult = getDeterministicPrompt(model, sfw, preview);
     output.value = promptResult;
     outputWrap.hidden = false;
     setStatus("Done.");

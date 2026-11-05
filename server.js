@@ -67,15 +67,34 @@ export function issueLicense({ email = "user@example.com", plan = "creator", lim
   return licenses[key];
 }
 
-// Model prompt generators
-function generatePromptForModel(model = "krea2", sfw = false) {
-  const models = {
-    krea2: "hyperrealistic portrait of a modern subject, soft studio cinematic key lighting, intricate skin pores, natural subsurface scattering, shot on 85mm f/1.4 lens, 8k resolution, detailed atmospheric depth",
-    "z-image": `ultra-fast realistic female face, direct beauty lighting, natural makeup, clean sharp eyes, crisp hair strands, high-contrast creator portrait${sfw ? " --sfw" : ""}`,
-    banana: "vibrant lifestyle carousel frame, dynamic candid pose, golden hour rim illumination, clean modern wardrobe, photorealistic social media aesthetic",
-    gpt2: "A detailed studio headshot of a confident subject against a seamless neutral backdrop. Warm side key light illuminating fine facial textures, subtle reflection in irises, balanced color grade."
+// High-fidelity 5-Vector Prompt Synthesis Engine
+function generatePromptForModel(model = "krea2", sfw = false, imageMeta = null) {
+  const meta = imageMeta || {
+    subject: "a candid young subject with authentic micro-expressions, fine skin pores, and natural styling",
+    environment: "contemporary architectural setting with atmospheric depth and soft out-of-focus background",
+    lighting: "natural cinematic directional key lighting with subtle ambient fill and soft rim highlights",
+    camera: "shot on 85mm f/1.4 portrait prime lens, shallow depth of field with organic bokeh",
+    style: "authentic 35mm film aesthetic, photorealistic texture, balanced editorial color grading"
   };
-  return models[model] || models.krea2;
+
+  switch (model) {
+    case "krea2":
+      return `A candid high-fidelity photograph of ${meta.subject}. Setting: ${meta.environment}. Illuminated by ${meta.lighting}. Captured with ${meta.camera}, ${meta.style}, natural skin pores, realistic depth of field, balanced photorealistic color grade.`;
+
+    case "z-image":
+      return `realistic creator portrait of ${meta.subject}, ${meta.environment}, ${meta.lighting}, ${meta.camera}, sharp focus, authentic micro-textures${sfw ? " --sfw" : ""}`;
+
+    case "nano-banana":
+    case "banana":
+      return `vibrant candid lifestyle frame featuring ${meta.subject} in ${meta.environment}. ${meta.lighting}, shot on ${meta.camera}, ${meta.style}, authentic social media aesthetic`;
+
+    case "image2":
+    case "gpt2":
+      return `A photorealistic medium close-up of ${meta.subject} set against ${meta.environment}. Lighting is ${meta.lighting}. Photographed with ${meta.camera}, displaying ${meta.style} with natural textural details.`;
+
+    default:
+      return `A candid high-fidelity photograph of ${meta.subject}. Setting: ${meta.environment}. ${meta.lighting}. Captured with ${meta.camera}, ${meta.style}.`;
+  }
 }
 
 // Handle JSON responses with CORS
